@@ -1,0 +1,116 @@
+:root {
+  color-scheme: light;
+  --ink: #233128;
+  --muted: #667169;
+  --paper: #f7f4eb;
+  --panel: #fffdf7;
+  --line: #d8d4c8;
+  --forest: #285842;
+  --forest-dark: #173b2b;
+  --sun: #d9903d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body { height: 100%; margin: 0; }
+
+body { background: var(--paper); color: var(--ink); }
+
+button, input { font: inherit; }
+
+.app-shell { display: grid; grid-template-columns: 370px 1fr; height: 100vh; }
+
+.sidebar {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  z-index: 500;
+}
+
+.brand { padding: 30px 26px 18px; background: var(--forest-dark); color: white; }
+.brand h1 { margin: 3px 0 5px; font-family: Georgia, serif; font-size: 32px; }
+.brand .subhead { margin: 0; color: #d8e2dc; line-height: 1.45; }
+.eyebrow { margin: 0; color: var(--sun); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+
+.search-wrap { padding: 20px 20px 14px; }
+.search-wrap label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 13px; font-weight: 700; }
+.search-wrap input { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; background: white; color: var(--ink); outline: none; }
+.search-wrap input:focus { border-color: var(--forest); box-shadow: 0 0 0 3px #28584222; }
+
+.filters { padding: 0 20px 16px; border-bottom: 1px solid var(--line); }
+.filter-heading-row { display: flex; align-items: center; justify-content: space-between; }
+.filter-heading-row h2 { margin: 0; font-size: 14px; }
+.filter-heading-row button { border: 0; background: none; color: var(--forest); cursor: pointer; font-size: 12px; font-weight: 750; }
+.filter-selects { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 9px; }
+.filter-selects label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.filter-selects select { display: block; width: 100%; margin-top: 5px; border: 1px solid var(--line); border-radius: 7px; padding: 7px 8px; background: white; color: var(--ink); font-size: 13px; text-transform: none; }
+.feature-help { margin: 11px 0 7px; color: var(--muted); font-size: 11px; }
+.feature-filters { display: flex; max-height: 78px; flex-wrap: wrap; gap: 5px; overflow-y: auto; }
+.feature-filter { border: 1px solid var(--line); border-radius: 999px; padding: 4px 7px; background: white; color: var(--muted); cursor: pointer; font-size: 11px; }
+.feature-filter.include { border-color: #2f7654; background: #e4f1e8; color: #21533b; }
+.feature-filter.exclude { border-color: #b96a61; background: #f8e7e4; color: #863d35; text-decoration: line-through; }
+
+.list-heading { display: flex; align-items: center; justify-content: space-between; padding: 0 20px 10px; color: var(--muted); font-size: 13px; }
+.list-heading button { border: 0; background: none; color: var(--forest); cursor: pointer; font-weight: 750; }
+.site-list { overflow-y: auto; border-top: 1px solid var(--line); }
+.site-card { width: 100%; padding: 14px 20px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: inherit; cursor: pointer; text-align: left; }
+.site-card:hover, .site-card.active { background: #eef2ea; }
+.site-card strong { display: block; margin-bottom: 4px; font-family: Georgia, serif; font-size: 17px; }
+.site-card span { color: var(--muted); font-size: 13px; }
+
+.map-panel { position: relative; min-width: 0; }
+#map { width: 100%; height: 100%; background: #d9e1d4; cursor: grab; touch-action: none; }
+#map:active { cursor: grabbing; }
+.map-error { position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; background: #eef2ea; text-align: center; }
+
+.details {
+  position: absolute;
+  z-index: 600;
+  top: 20px;
+  right: 20px;
+  width: min(390px, calc(100% - 40px));
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+  padding: 23px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 253, 247, .97);
+  box-shadow: 0 18px 45px #1d2d2350;
+  backdrop-filter: blur(8px);
+}
+.details h2 { margin: 5px 30px 5px 0; font-family: Georgia, serif; font-size: 25px; line-height: 1.15; }
+.detail-location { margin: 0 0 18px; color: var(--muted); }
+.close-button { position: absolute; top: 13px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #e8e8df; color: var(--ink); cursor: pointer; font-size: 24px; line-height: 1; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.fact { padding: 10px; border-radius: 8px; background: #eef2ea; }
+.fact span { display: block; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.fact strong { display: block; margin-top: 3px; font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.chip { padding: 5px 8px; border-radius: 999px; background: #f4dfc3; color: #6e461a; font-size: 12px; font-weight: 750; }
+.notes { line-height: 1.45; }
+details { margin-top: 15px; border-top: 1px solid var(--line); padding-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+summary { color: var(--forest); cursor: pointer; font-weight: 800; }
+.source { font-style: italic; }
+
+.leaflet-popup-content-wrapper { border-radius: 9px; }
+.leaflet-popup-content { margin: 12px 14px; font-family: inherit; }
+.popup-title { font-family: Georgia, serif; font-size: 15px; font-weight: 700; }
+
+@media (max-width: 760px) {
+  .app-shell { grid-template-columns: 1fr; grid-template-rows: 42vh 58vh; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand { padding: 18px 20px 14px; }
+  .brand h1 { font-size: 25px; }
+  .brand .subhead { display: none; }
+  .search-wrap { padding: 12px 16px 9px; }
+  .filters { padding: 0 16px 10px; }
+  .feature-filters { max-height: 56px; }
+  .list-heading { padding: 0 16px 8px; }
+  .site-card { padding: 11px 16px; }
+  .details { inset: 10px; width: auto; max-height: calc(100% - 20px); }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLM Camping Map</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <header class="brand">
+        <p class="eyebrow">Utah field guide</p>
+        <h1>BLM Camping</h1>
+        <p class="subhead">Explore dispersed and developed sites from the guide.</p>
+      </header>
+
+      <div class="search-wrap">
+        <label for="search">Find a site or nearby town</label>
+        <input id="search" type="search" placeholder="Try Vernal or canyon…" autocomplete="off">
+      </div>
+
+      <section class="filters" aria-labelledby="filter-heading">
+        <div class="filter-heading-row">
+          <h2 id="filter-heading">Filters</h2>
+          <button id="clear-filters" type="button">Clear</button>
+        </div>
+        <div class="filter-selects">
+          <label>
+            Cost
+            <select id="cost-filter">
+              <option value="all">All costs</option>
+              <option value="free">Free</option>
+              <option value="paid">Paid</option>
+            </select>
+          </label>
+          <label>
+            Site type
+            <select id="type-filter">
+              <option value="all">All types</option>
+              <option value="dispersed">Dispersed</option>
+              <option value="non-dispersed">Non-dispersed</option>
+            </select>
+          </label>
+        </div>
+        <p class="feature-help">Click a feature once to require it, twice to exclude it.</p>
+        <div id="feature-filters" class="feature-filters" aria-label="Feature filters"></div>
+      </section>
+
+      <div class="list-heading">
+        <span id="result-count">Loading sites…</span>
+        <button id="show-all" type="button">Show all</button>
+      </div>
+      <div id="site-list" class="site-list" aria-live="polite"></div>
+    </aside>
+
+    <section class="map-panel" aria-label="Camping site map">
+      <div id="map"></div>
+      <div id="map-error" class="map-error" hidden>
+        The map library could not load. Check your internet connection and refresh.
+      </div>
+      <section id="details" class="details" hidden aria-live="polite">
+        <button id="close-details" class="close-button" type="button" aria-label="Close details">×</button>
+        <p id="detail-category" class="eyebrow"></p>
+        <h2 id="detail-name"></h2>
+        <p id="detail-location" class="detail-location"></p>
+        <div id="detail-facts" class="facts"></div>
+        <div id="detail-features" class="chips"></div>
+        <p id="detail-notes" class="notes"></p>
+        <details>
+          <summary>Source description</summary>
+          <p id="detail-source-text"></p>
+          <p id="detail-source" class="source"></p>
+        </details>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

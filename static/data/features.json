@@ -1,0 +1,44 @@
+{
+  "features": [
+    {
+      "name": "4x4 recommended",
+      "site_count": 1
+    },
+    {
+      "name": "Boat-in",
+      "site_count": 3
+    },
+    {
+      "name": "Group sites",
+      "site_count": 1
+    },
+    {
+      "name": "Lakeshore",
+      "site_count": 1
+    },
+    {
+      "name": "No open fires",
+      "site_count": 2
+    },
+    {
+      "name": "No RV dump",
+      "site_count": 2
+    },
+    {
+      "name": "OHV area",
+      "site_count": 1
+    },
+    {
+      "name": "Petroglyph site nearby",
+      "site_count": 1
+    },
+    {
+      "name": "Small rigs",
+      "site_count": 1
+    },
+    {
+      "name": "Trailhead",
+      "site_count": 1
+    }
+  ]
+}
