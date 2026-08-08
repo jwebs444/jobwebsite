@@ -1,38 +1,27 @@
-# create-svelte
+# BLM Camping Map
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A dependency-free Python web app that reads camping locations from `blm_camping.sqlite` and displays them on an interactive OpenStreetMap map.
 
-## Creating a project
+The browser reads a generated JSON snapshot of the SQLite records, allowing the same interface to deploy as a static Cloudflare Pages site. The SQLite database remains the source of record.
 
-If you're seeing this, you've probably already done this step. Congrats!
+After changing the database, refresh the deployment snapshot with `python export_static_data.py` before building.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Run
 
-# create a new project in my-app
-npm create svelte@latest my-app
+From PowerShell in this directory, run:
+
+```powershell
+.\start.ps1
 ```
 
-## Developing
+Then open <http://127.0.0.1:8000>.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+The launcher uses a system Python installation when available, otherwise it finds the Python runtime bundled with Codex Desktop. The server has no third-party dependencies. The browser needs internet access to load Leaflet and OpenStreetMap tiles.
 
-```bash
-npm run dev
+## Build for deployment
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+```powershell
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+The static deployment is written to `dist/`.
