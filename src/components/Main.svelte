@@ -85,12 +85,16 @@
 			inquiryMessage = result.message;
 			inquiryState = result.ok ? 'success' : 'error';
 
-			if (result.ok) form.reset();
+			if (result.ok) {
+				form.reset();
+				if (turnstileWidgetId) window.turnstile?.remove(turnstileWidgetId);
+				turnstileWidgetId = undefined;
+			}
 		} catch {
 			inquiryState = 'error';
 			inquiryMessage = 'The message could not be sent right now. Please try again shortly.';
 		} finally {
-			resetSecurityCheck();
+			if (inquiryState !== 'success') resetSecurityCheck();
 		}
 	}
 
@@ -233,48 +237,59 @@
 		</div>
 	</section>
 
-	<section class="impact section-shell" aria-labelledby="impact-title">
-		<div class="impact-heading">
-			<p class="eyebrow">Selected outcomes</p>
-			<h2 id="impact-title">Useful outcomes, not decorative metrics.</h2>
+	<section class="credentials section-shell" aria-labelledby="credentials-title">
+		<div class="credentials-heading">
+			<p class="eyebrow">Outcomes & education</p>
+			<h2 id="credentials-title">What I’ve delivered. What I’ve learned.</h2>
 		</div>
-		<div class="impact-grid">
-			{#each selectedImpact as item, index}
-				<article>
-					<p>0{index + 1}</p>
-					<h3>{item.title}</h3>
-					<span>{item.body}</span>
-				</article>
-			{/each}
-		</div>
-	</section>
-
-	<section class="education section-shell" aria-labelledby="education-title">
-		<div>
-			<p class="eyebrow">Education</p>
-			<h2 id="education-title">Continual learning, applied immediately.</h2>
-		</div>
-		<div class="education-list">
-			<article>
-				<p>2023</p>
-				<h3>Python, SQL & DevOps Bootcamp</h3>
-				<span>NuCamp</span>
-			</article>
-			<article>
-				<p>2022</p>
-				<h3>Wilderness First Responder</h3>
-				<span>Desert Mountain Medicine</span>
-			</article>
-			<article>
-				<p>2022</p>
-				<h3>Canyoneering Leadership & Rescue</h3>
-				<span>Uber Adventures Accredited Canyoneering Program</span>
-			</article>
-			<article>
-				<p>2018 — 2022</p>
-				<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
-				<span>Northern Illinois University</span>
-			</article>
+		<div class="credentials-columns">
+			<div class="credentials-group">
+				<p class="credentials-label">Selected outcomes</p>
+				<div class="outcome-list">
+					{#each selectedImpact as item, index}
+						<article>
+							<p>0{index + 1}</p>
+							<div>
+								<h3>{item.title}</h3>
+								<span>{item.body}</span>
+							</div>
+						</article>
+					{/each}
+				</div>
+			</div>
+			<div class="credentials-group">
+				<p class="credentials-label">Education</p>
+				<div class="education-list">
+					<article>
+						<p>2023</p>
+						<div>
+							<h3>Python, SQL & DevOps Bootcamp</h3>
+							<span>NuCamp</span>
+						</div>
+					</article>
+					<article>
+						<p>2022</p>
+						<div>
+							<h3>Wilderness First Responder</h3>
+							<span>Desert Mountain Medicine</span>
+						</div>
+					</article>
+					<article>
+						<p>2022</p>
+						<div>
+							<h3>Canyoneering Leadership & Rescue</h3>
+							<span>Uber Adventures Accredited Canyoneering Program</span>
+						</div>
+					</article>
+					<article>
+						<p>2018 — 2022</p>
+						<div>
+							<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
+							<span>Northern Illinois University</span>
+						</div>
+					</article>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -331,95 +346,104 @@
 						>
 					</div>
 				</div>
-				<form class="inquiry-form" method="POST" action="/api/inquiry" on:submit={submitInquiry}>
-					<div class="form-field">
-						<label for="inquiry-name">Name</label>
-						<input id="inquiry-name" name="name" autocomplete="name" maxlength="100" required />
-					</div>
-					<div class="form-field">
-						<label for="inquiry-email">Email</label>
-						<input
-							id="inquiry-email"
-							name="email"
-							type="email"
-							autocomplete="email"
-							maxlength="254"
-							required
-						/>
-					</div>
-					<div class="form-field">
-						<label for="inquiry-organization">Organization <span>Optional</span></label>
-						<input
-							id="inquiry-organization"
-							name="organization"
-							autocomplete="organization"
-							maxlength="120"
-						/>
-					</div>
-					<div class="form-field">
-						<label for="inquiry-topic">What would you like to discuss?</label>
-						<select id="inquiry-topic" name="topic" required>
-							<option value="" disabled selected>Choose a topic</option>
-							{#each inquiryTopics as topic}
-								<option value={topic}>{topic}</option>
-							{/each}
-						</select>
-					</div>
-					<div class="form-field form-field--wide">
-						<label for="inquiry-message">Tell me about the work</label>
-						<textarea
-							id="inquiry-message"
-							name="message"
-							rows="7"
-							minlength="20"
-							maxlength="4000"
-							required
-						></textarea>
-					</div>
-					<div class="bot-trap" aria-hidden="true">
-						<label for="inquiry-website">Website</label>
-						<input id="inquiry-website" name="website" tabindex="-1" autocomplete="off" />
-					</div>
-					{#if turnstileSiteKey}
-						<div
-							class:verification-panel--ready={turnstileState === 'ready'}
-							class:verification-panel--error={turnstileState === 'error'}
-							class="verification-panel"
+				{#if inquiryState === 'success'}
+					<div class="inquiry-success" role="status" aria-live="polite">
+						<p>Inquiry sent</p>
+						<h3>{inquiryMessage}</h3>
+						<span
+							>I’ll respond as soon as I can. Reload this page if you need to send another inquiry.</span
 						>
-							<div class="verification-panel__heading">
-								<span>Security check</span>
-								<p role="status" aria-live="polite">{turnstileMessage}</p>
-							</div>
-							<div id="inquiry-turnstile"></div>
+					</div>
+				{:else}
+					<form class="inquiry-form" method="POST" action="/api/inquiry" on:submit={submitInquiry}>
+						<div class="form-field">
+							<label for="inquiry-name">Name</label>
+							<input id="inquiry-name" name="name" autocomplete="name" maxlength="100" required />
 						</div>
-					{/if}
-					<div class="inquiry-form__footer">
-						<p>Your details are used only to respond to this inquiry.</p>
-						<button
-							class="button button-light"
-							type="submit"
-							disabled={inquiryState === 'submitting' || !turnstileSiteKey}
-						>
-							{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
-							<span aria-hidden="true">→</span>
-						</button>
-					</div>
-					{#if !turnstileSiteKey}
-						<p class="form-status form-status--error" role="status">
-							The inquiry form is temporarily unavailable.
-						</p>
-					{:else if inquiryMessage}
-						<p
-							class:form-status--success={inquiryState === 'success'}
-							class:form-status--error={inquiryState === 'error'}
-							class="form-status"
-							role="status"
-							aria-live="polite"
-						>
-							{inquiryMessage}
-						</p>
-					{/if}
-				</form>
+						<div class="form-field">
+							<label for="inquiry-email">Email</label>
+							<input
+								id="inquiry-email"
+								name="email"
+								type="email"
+								autocomplete="email"
+								maxlength="254"
+								required
+							/>
+						</div>
+						<div class="form-field">
+							<label for="inquiry-organization">Organization <span>Optional</span></label>
+							<input
+								id="inquiry-organization"
+								name="organization"
+								autocomplete="organization"
+								maxlength="120"
+							/>
+						</div>
+						<div class="form-field">
+							<label for="inquiry-topic">What would you like to discuss?</label>
+							<select id="inquiry-topic" name="topic" required>
+								<option value="" disabled selected>Choose a topic</option>
+								{#each inquiryTopics as topic}
+									<option value={topic}>{topic}</option>
+								{/each}
+							</select>
+						</div>
+						<div class="form-field form-field--wide">
+							<label for="inquiry-message">Tell me about the work</label>
+							<textarea
+								id="inquiry-message"
+								name="message"
+								rows="7"
+								minlength="20"
+								maxlength="4000"
+								required
+							></textarea>
+						</div>
+						<div class="bot-trap" aria-hidden="true">
+							<label for="inquiry-website">Website</label>
+							<input id="inquiry-website" name="website" tabindex="-1" autocomplete="off" />
+						</div>
+						{#if turnstileSiteKey}
+							<div
+								class:verification-panel--ready={turnstileState === 'ready'}
+								class:verification-panel--error={turnstileState === 'error'}
+								class="verification-panel"
+							>
+								<div class="verification-panel__heading">
+									<span>Security check</span>
+									<p role="status" aria-live="polite">{turnstileMessage}</p>
+								</div>
+								<div id="inquiry-turnstile"></div>
+							</div>
+						{/if}
+						<div class="inquiry-form__footer">
+							<p>Your details are used only to respond to this inquiry.</p>
+							<button
+								class="button button-light"
+								type="submit"
+								disabled={inquiryState === 'submitting' || !turnstileSiteKey}
+							>
+								{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
+								<span aria-hidden="true">→</span>
+							</button>
+						</div>
+						{#if !turnstileSiteKey}
+							<p class="form-status form-status--error" role="status">
+								The inquiry form is temporarily unavailable.
+							</p>
+						{:else if inquiryMessage}
+							<p
+								class:form-status--error={inquiryState === 'error'}
+								class="form-status"
+								role="status"
+								aria-live="polite"
+							>
+								{inquiryMessage}
+							</p>
+						{/if}
+					</form>
+				{/if}
 			</div>
 		</div>
 	</section>
