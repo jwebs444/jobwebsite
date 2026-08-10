@@ -1,34 +1,30 @@
 <script lang="ts">
 	import ProjectCard from './ProjectCard.svelte';
 	import { featuredProjects } from '$lib/projects';
+	import { inquiryTopics } from '$lib/inquiry';
+	import { env } from '$env/dynamic/public';
 
-	const emailAddress = 'jwebs444@gmail.com';
-	let copyLabel = 'Copy email address';
+	let inquiryState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
+	let inquiryMessage = '';
 
-	function openEmailApp() {
-		const subject = encodeURIComponent('Website inquiry');
-		window.location.href = `mailto:${emailAddress}?subject=${subject}`;
-	}
+	async function submitInquiry(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		inquiryState = 'submitting';
+		inquiryMessage = '';
 
-	async function copyEmail() {
 		try {
-			if (navigator.clipboard?.writeText) {
-				await navigator.clipboard.writeText(emailAddress);
-			} else {
-				const field = document.createElement('textarea');
-				field.value = emailAddress;
-				field.style.position = 'fixed';
-				field.style.opacity = '0';
-				document.body.appendChild(field);
-				field.select();
-				document.execCommand('copy');
-				field.remove();
-			}
+			const response = await fetch('/api/inquiry', { method: 'POST', body: new FormData(form) });
+			const result = (await response.json()) as { ok: boolean; message: string };
+			inquiryMessage = result.message;
+			inquiryState = result.ok ? 'success' : 'error';
 
-			copyLabel = 'Email copied';
-			window.setTimeout(() => (copyLabel = 'Copy email address'), 2400);
+			if (result.ok) form.reset();
 		} catch {
-			copyLabel = 'Copy unavailable';
+			inquiryState = 'error';
+			inquiryMessage = 'The message could not be sent right now. Please try again shortly.';
+		} finally {
+			window.turnstile?.reset();
 		}
 	}
 
@@ -133,7 +129,6 @@
 			<img
 				src="/images/jason-canyon.jpg"
 				alt="Jason Weber smiling during a canyon expedition"
-				fetchpriority="high"
 			/>
 			<p class="portrait-caption">Curious by nature.<br />Practical by training.</p>
 		</div>
@@ -275,33 +270,107 @@
 		<h2 id="contact-title">Have a difficult system that needs a practical next move?</h2>
 		<div class="contact-panel">
 			<div class="contact-intro">
-				<span>Direct conversation</span>
-				<p>Open a new message in your system’s default email app, or copy my address.</p>
+				<span>Start a conversation</span>
+				<p>Tell me what you are working through, where it is stuck, and what a useful outcome looks like.</p>
+				<div class="contact-links" aria-label="Professional profiles">
+					<a
+						class="text-link text-link--light"
+						href="https://www.linkedin.com/in/jason-weber-data/"
+						target="_blank"
+						rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
+					>
+					<a
+						class="text-link text-link--light"
+						href="https://github.com/jwebs444"
+						target="_blank"
+						rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
+					>
+				</div>
 			</div>
-			<div class="contact-actions">
-				<button class="button button-light" type="button" on:click={openEmailApp}
-					>Email Jason <span aria-hidden="true">↗</span></button
-				>
-				<button class="text-button text-link text-link--light" type="button" on:click={copyEmail}
-					>{copyLabel}</button
-				>
-				<a
-					class="text-link text-link--light"
-					href="https://www.linkedin.com/in/jason-weber-data/"
-					target="_blank"
-					rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
-				>
-				<a
-					class="text-link text-link--light"
-					href="https://github.com/jwebs444"
-					target="_blank"
-					rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
-				>
-			</div>
+			<form class="inquiry-form" method="POST" action="/api/inquiry" on:submit={submitInquiry}>
+				<div class="form-field">
+					<label for="inquiry-name">Name</label>
+					<input id="inquiry-name" name="name" autocomplete="name" maxlength="100" required />
+				</div>
+				<div class="form-field">
+					<label for="inquiry-email">Email</label>
+					<input
+						id="inquiry-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						maxlength="254"
+						required
+					/>
+				</div>
+				<div class="form-field">
+					<label for="inquiry-organization">Organization <span>Optional</span></label>
+					<input
+						id="inquiry-organization"
+						name="organization"
+						autocomplete="organization"
+						maxlength="120"
+					/>
+				</div>
+				<div class="form-field">
+					<label for="inquiry-topic">What would you like to discuss?</label>
+					<select id="inquiry-topic" name="topic" required>
+						<option value="" disabled selected>Choose a topic</option>
+						{#each inquiryTopics as topic}
+							<option value={topic}>{topic}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="form-field form-field--wide">
+					<label for="inquiry-message">Tell me about the work</label>
+					<textarea
+						id="inquiry-message"
+						name="message"
+						rows="7"
+						minlength="20"
+						maxlength="4000"
+						required
+					></textarea>
+				</div>
+				<div class="bot-trap" aria-hidden="true">
+					<label for="inquiry-website">Website</label>
+					<input id="inquiry-website" name="website" tabindex="-1" autocomplete="off" />
+				</div>
+				{#if env.PUBLIC_TURNSTILE_SITE_KEY}
+					<div
+						class="cf-turnstile"
+						data-sitekey={env.PUBLIC_TURNSTILE_SITE_KEY}
+						data-action="portfolio-inquiry"
+						data-theme="dark"
+						data-size="flexible"
+					></div>
+				{/if}
+				<div class="inquiry-form__footer">
+					<p>Your details are used only to respond to this inquiry.</p>
+					<button
+						class="button button-light"
+						type="submit"
+						disabled={inquiryState === 'submitting' || !env.PUBLIC_TURNSTILE_SITE_KEY}
+					>
+						{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
+						<span aria-hidden="true">→</span>
+					</button>
+				</div>
+				{#if !env.PUBLIC_TURNSTILE_SITE_KEY}
+					<p class="form-status form-status--error" role="status">
+						The inquiry form is temporarily unavailable.
+					</p>
+				{:else if inquiryMessage}
+					<p
+						class:form-status--success={inquiryState === 'success'}
+						class:form-status--error={inquiryState === 'error'}
+						class="form-status"
+						role="status"
+						aria-live="polite">{inquiryMessage}</p
+					>
+				{/if}
+			</form>
 		</div>
-		<p class="sr-only" aria-live="polite">
-			{copyLabel === 'Email copied' ? 'Email address copied to clipboard.' : ''}
-		</p>
 		<p class="contact-note">Full résumé available on request.</p>
 	</section>
 </main>

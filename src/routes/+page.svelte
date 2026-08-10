@@ -22,6 +22,8 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image" content="https://thejasonandjasonshow.com/og.png" />
 	<link rel="canonical" href="https://thejasonandjasonshow.com/" />
+	<link rel="preconnect" href="https://challenges.cloudflare.com" />
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </svelte:head>
 
 <Main />
