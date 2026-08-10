@@ -384,67 +384,77 @@ h3 {
 	filter: saturate(0.82) contrast(1.08) brightness(0.84);
 }
 
-.portrait-field {
-	position: absolute;
-	z-index: 3;
-	top: 24px;
-	right: 24px;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	gap: 7px;
-	color: var(--sky-light);
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-	font-size: 9px;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-}
-
 .portrait-caption {
 	position: absolute;
 	z-index: 4;
-	bottom: 24px;
-	left: 24px;
+	top: 24px;
+	right: 24px;
 	margin: 0;
+	padding: 10px 12px;
+	background: rgba(16, 24, 29, 0.76);
 	color: var(--white);
 	font-family: Georgia, 'Times New Roman', serif;
 	font-size: 15px;
 	font-style: italic;
+	line-height: 1.35;
+	text-align: right;
 }
 
-.proof-strip {
+.impact {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	background: var(--rust);
-	color: #fff;
+	grid-template-columns: minmax(250px, 0.65fr) minmax(0, 1.35fr);
+	gap: clamp(56px, 8vw, 120px);
+	padding-block: 92px;
+	border-bottom: 1px solid var(--line);
 }
 
-.proof-strip > div {
-	display: flex;
-	min-height: 140px;
-	flex-direction: column;
-	justify-content: center;
-	padding: 28px clamp(22px, 3.6vw, 54px);
-	border-right: 1px solid rgba(255, 255, 255, 0.25);
+.impact-heading .eyebrow {
+	margin-bottom: 14px;
+	color: var(--rust-dark);
 }
 
-.proof-strip > div:last-child {
-	border-right: 0;
-}
-
-.proof-strip strong {
-	margin-bottom: 7px;
+.impact-heading h2 {
+	margin: 0;
 	font-family: Georgia, 'Times New Roman', serif;
-	font-size: clamp(22px, 2.2vw, 31px);
+	font-size: clamp(33px, 3.8vw, 52px);
 	font-weight: 400;
+	letter-spacing: -0.045em;
+	line-height: 1.04;
 }
 
-.proof-strip span {
+.impact-grid {
+	border-top: 1px solid var(--ink);
+}
+
+.impact-grid article {
+	display: grid;
+	grid-template-columns: 48px minmax(190px, 0.8fr) minmax(260px, 1.2fr);
+	gap: 26px;
+	align-items: start;
+	padding: 25px 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.impact-grid article > p {
+	margin: 4px 0 0;
+	color: var(--rust-dark);
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 	font-size: 10px;
-	font-weight: 700;
-	letter-spacing: 0.09em;
-	line-height: 1.5;
-	text-transform: uppercase;
+}
+
+.impact-grid h3 {
+	margin: 0;
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: 24px;
+	font-weight: 400;
+	letter-spacing: -0.025em;
+	line-height: 1.14;
+}
+
+.impact-grid span {
+	color: var(--muted);
+	font-size: 14px;
+	line-height: 1.7;
 }
 
 .projects,
@@ -866,7 +876,7 @@ h3 {
 	border-top: 1px solid rgba(255, 255, 255, 0.42);
 }
 
-.contact-address span {
+.contact-intro span {
 	display: block;
 	margin-bottom: 10px;
 	color: #ffe0d2;
@@ -876,20 +886,24 @@ h3 {
 	text-transform: uppercase;
 }
 
-.contact-address p {
-	margin-bottom: 8px;
+.contact-intro p {
+	max-width: 460px;
+	margin: 0;
 	font-family: Georgia, 'Times New Roman', serif;
-	font-size: clamp(24px, 3vw, 38px);
+	font-size: clamp(22px, 2.6vw, 34px);
 	letter-spacing: -0.03em;
-}
-
-.contact-address small {
-	color: #ffe0d2;
-	font-size: 12px;
+	line-height: 1.2;
 }
 
 .contact-panel .contact-actions {
 	margin-top: 0;
+}
+
+.text-button {
+	background: transparent;
+	color: inherit;
+	font-family: inherit;
+	cursor: pointer;
 }
 
 .text-link--light {
@@ -949,18 +963,6 @@ h3 {
 		min-height: 500px;
 	}
 
-	.proof-strip {
-		grid-template-columns: 1fr 1fr;
-	}
-
-	.proof-strip > div:nth-child(2) {
-		border-right: 0;
-	}
-
-	.proof-strip > div:nth-child(-n + 2) {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-	}
-
 	.timeline-item {
 		grid-template-columns: 140px minmax(240px, 0.8fr) minmax(260px, 1.2fr);
 		gap: 25px;
@@ -1012,14 +1014,18 @@ h3 {
 		min-height: 510px;
 	}
 
-	.proof-strip {
+	.impact {
 		grid-template-columns: 1fr;
+		gap: 42px;
+		padding-block: 72px;
 	}
 
-	.proof-strip > div {
-		min-height: 112px;
-		border-right: 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	.impact-grid article {
+		grid-template-columns: 40px 1fr;
+	}
+
+	.impact-grid article > span {
+		grid-column: 2;
 	}
 
 	.projects,

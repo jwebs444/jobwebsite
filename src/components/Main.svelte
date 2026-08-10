@@ -5,6 +5,11 @@
 	const emailAddress = 'jwebs444@gmail.com';
 	let copyLabel = 'Copy email address';
 
+	function openEmailApp() {
+		const subject = encodeURIComponent('Website inquiry');
+		window.location.href = `mailto:${emailAddress}?subject=${subject}`;
+	}
+
 	async function copyEmail() {
 		try {
 			if (navigator.clipboard?.writeText) {
@@ -23,9 +28,24 @@
 			copyLabel = 'Email copied';
 			window.setTimeout(() => (copyLabel = 'Copy email address'), 2400);
 		} catch {
-			copyLabel = 'Select the address';
+			copyLabel = 'Copy unavailable';
 		}
 	}
+
+	const selectedImpact = [
+		{
+			title: 'Recovered critical legacy data',
+			body: 'Recovered an active data set from a failing Windows 7 system for a multi-million-dollar investment partnership.'
+		},
+		{
+			title: 'Leads technology through operations',
+			body: 'Integrates new technology and improves day-to-day systems across a working hoist and crane business.'
+		},
+		{
+			title: 'Built a business while earning two degrees',
+			body: 'Created and operated a profitable private-chef service while completing degrees in psychology and philosophy.'
+		}
+	];
 
 	const experience = [
 		{
@@ -48,13 +68,6 @@
 			company: 'Northern Illinois University',
 			description:
 				'Supported undergraduate philosophy instruction and made complex arguments clearer and more approachable for students.'
-		},
-		{
-			period: 'Aug 2020 — Jan 2022',
-			role: 'Volunteer Data Analyst & Data Manager',
-			company: 'Psychology Research Lab · Northern Illinois University',
-			description:
-				'Contributed volunteer data-analysis and data-management projects in support of the lab’s research work.'
 		},
 		{
 			period: '2018 — 2021',
@@ -117,23 +130,29 @@
 		</div>
 
 		<div class="hero-portrait">
-			<div class="portrait-field" aria-hidden="true">
-				<span>Operator</span><span>Builder</span><span>Translator</span>
-			</div>
 			<img
 				src="/images/jason-canyon.jpg"
 				alt="Jason Weber smiling during a canyon expedition"
 				fetchpriority="high"
 			/>
-			<p class="portrait-caption">Curious by nature. Practical by training.</p>
+			<p class="portrait-caption">Curious by nature.<br />Practical by training.</p>
 		</div>
 	</section>
 
-	<section class="proof-strip" aria-label="Career snapshot">
-		<div><strong>Current</strong><span>Technology & Operations Manager</span></div>
-		<div><strong>2023</strong><span>Python, SQL & DevOps bootcamp</span></div>
-		<div><strong>2 degrees</strong><span>Psychology & Philosophy, NIU</span></div>
-		<div><strong>11 tests</strong><span>Across two featured Python projects</span></div>
+	<section class="impact section-shell" aria-labelledby="impact-title">
+		<div class="impact-heading">
+			<p class="eyebrow">Selected impact</p>
+			<h2 id="impact-title">Useful outcomes, not decorative metrics.</h2>
+		</div>
+		<div class="impact-grid">
+			{#each selectedImpact as item, index}
+				<article>
+					<p>0{index + 1}</p>
+					<h3>{item.title}</h3>
+					<span>{item.body}</span>
+				</article>
+			{/each}
+		</div>
 	</section>
 
 	<section class="projects section-shell" id="work" aria-labelledby="work-title">
@@ -234,6 +253,16 @@
 				<span>NuCamp</span>
 			</article>
 			<article>
+				<p>2022</p>
+				<h3>Wilderness First Responder</h3>
+				<span>Desert Mountain Medicine</span>
+			</article>
+			<article>
+				<p>2022</p>
+				<h3>Canyoneering Leadership & Rescue</h3>
+				<span>Uber Adventures Accredited Canyoneering Program</span>
+			</article>
+			<article>
 				<p>2018 — 2022</p>
 				<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
 				<span>Northern Illinois University</span>
@@ -245,16 +274,17 @@
 		<p class="eyebrow">Let’s talk</p>
 		<h2 id="contact-title">Have a difficult system that needs a practical next move?</h2>
 		<div class="contact-panel">
-			<div class="contact-address">
-				<span>Direct email</span>
-				<p>{emailAddress}</p>
-				<small>No mail app required—copy the address and use it anywhere.</small>
+			<div class="contact-intro">
+				<span>Direct conversation</span>
+				<p>Open a new message in your system’s default email app, or copy my address.</p>
 			</div>
 			<div class="contact-actions">
-				<button class="button button-light" type="button" on:click={copyEmail}
-					>{copyLabel} <span aria-hidden="true">↗</span></button
+				<button class="button button-light" type="button" on:click={openEmailApp}
+					>Email Jason <span aria-hidden="true">↗</span></button
 				>
-				<a class="text-link text-link--light" href={`mailto:${emailAddress}`}>Open email app</a>
+				<button class="text-button text-link text-link--light" type="button" on:click={copyEmail}
+					>{copyLabel}</button
+				>
 				<a
 					class="text-link text-link--light"
 					href="https://www.linkedin.com/in/jason-weber-data/"
@@ -269,7 +299,9 @@
 				>
 			</div>
 		</div>
-		<p class="sr-only" aria-live="polite">{copyLabel === 'Email copied' ? emailAddress : ''}</p>
+		<p class="sr-only" aria-live="polite">
+			{copyLabel === 'Email copied' ? 'Email address copied to clipboard.' : ''}
+		</p>
 		<p class="contact-note">Full résumé available on request.</p>
 	</section>
 </main>
