@@ -1,31 +1,48 @@
 <script lang="ts">
 	import ProjectCard from './ProjectCard.svelte';
 	import { featuredProjects } from '$lib/projects';
+	import { inquiryTopics } from '$lib/inquiry';
 
-	const emailAddress = 'jwebs444@gmail.com';
-	let copyLabel = 'Copy email address';
+	export let turnstileSiteKey = '';
 
-	async function copyEmail() {
+	let inquiryState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
+	let inquiryMessage = '';
+
+	async function submitInquiry(event: SubmitEvent) {
+		event.preventDefault();
+		const form = event.currentTarget as HTMLFormElement;
+		inquiryState = 'submitting';
+		inquiryMessage = '';
+
 		try {
-			if (navigator.clipboard?.writeText) {
-				await navigator.clipboard.writeText(emailAddress);
-			} else {
-				const field = document.createElement('textarea');
-				field.value = emailAddress;
-				field.style.position = 'fixed';
-				field.style.opacity = '0';
-				document.body.appendChild(field);
-				field.select();
-				document.execCommand('copy');
-				field.remove();
-			}
+			const response = await fetch('/api/inquiry', { method: 'POST', body: new FormData(form) });
+			const result = (await response.json()) as { ok: boolean; message: string };
+			inquiryMessage = result.message;
+			inquiryState = result.ok ? 'success' : 'error';
 
-			copyLabel = 'Email copied';
-			window.setTimeout(() => (copyLabel = 'Copy email address'), 2400);
+			if (result.ok) form.reset();
 		} catch {
-			copyLabel = 'Select the address';
+			inquiryState = 'error';
+			inquiryMessage = 'The message could not be sent right now. Please try again shortly.';
+		} finally {
+			window.turnstile?.reset();
 		}
 	}
+
+	const selectedImpact = [
+		{
+			title: 'Recovered critical legacy data',
+			body: 'Recovered an active data set from a failing Windows 7 system for a multi-million-dollar investment partnership.'
+		},
+		{
+			title: 'Leads technology through operations',
+			body: 'Integrates new technology and improves day-to-day systems across a working hoist and crane business.'
+		},
+		{
+			title: 'Built a business while earning two degrees',
+			body: 'Created and operated a profitable private-chef service while completing degrees in psychology and philosophy.'
+		}
+	];
 
 	const experience = [
 		{
@@ -48,13 +65,6 @@
 			company: 'Northern Illinois University',
 			description:
 				'Supported undergraduate philosophy instruction and made complex arguments clearer and more approachable for students.'
-		},
-		{
-			period: 'Aug 2020 — Jan 2022',
-			role: 'Volunteer Data Analyst & Data Manager',
-			company: 'Psychology Research Lab · Northern Illinois University',
-			description:
-				'Contributed volunteer data-analysis and data-management projects in support of the lab’s research work.'
 		},
 		{
 			period: '2018 — 2021',
@@ -117,23 +127,28 @@
 		</div>
 
 		<div class="hero-portrait">
-			<div class="portrait-field" aria-hidden="true">
-				<span>Operator</span><span>Builder</span><span>Translator</span>
-			</div>
 			<img
 				src="/images/jason-canyon.jpg"
 				alt="Jason Weber smiling during a canyon expedition"
-				fetchpriority="high"
 			/>
-			<p class="portrait-caption">Curious by nature. Practical by training.</p>
+			<p class="portrait-caption">Curious by nature.<br />Practical by training.</p>
 		</div>
 	</section>
 
-	<section class="proof-strip" aria-label="Career snapshot">
-		<div><strong>Current</strong><span>Technology & Operations Manager</span></div>
-		<div><strong>2023</strong><span>Python, SQL & DevOps bootcamp</span></div>
-		<div><strong>2 degrees</strong><span>Psychology & Philosophy, NIU</span></div>
-		<div><strong>11 tests</strong><span>Across two featured Python projects</span></div>
+	<section class="impact section-shell" aria-labelledby="impact-title">
+		<div class="impact-heading">
+			<p class="eyebrow">Selected impact</p>
+			<h2 id="impact-title">Useful outcomes, not decorative metrics.</h2>
+		</div>
+		<div class="impact-grid">
+			{#each selectedImpact as item, index}
+				<article>
+					<p>0{index + 1}</p>
+					<h3>{item.title}</h3>
+					<span>{item.body}</span>
+				</article>
+			{/each}
+		</div>
 	</section>
 
 	<section class="projects section-shell" id="work" aria-labelledby="work-title">
@@ -234,6 +249,16 @@
 				<span>NuCamp</span>
 			</article>
 			<article>
+				<p>2022</p>
+				<h3>Wilderness First Responder</h3>
+				<span>Desert Mountain Medicine</span>
+			</article>
+			<article>
+				<p>2022</p>
+				<h3>Canyoneering Leadership & Rescue</h3>
+				<span>Uber Adventures Accredited Canyoneering Program</span>
+			</article>
+			<article>
 				<p>2018 — 2022</p>
 				<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
 				<span>Northern Illinois University</span>
@@ -245,31 +270,108 @@
 		<p class="eyebrow">Let’s talk</p>
 		<h2 id="contact-title">Have a difficult system that needs a practical next move?</h2>
 		<div class="contact-panel">
-			<div class="contact-address">
-				<span>Direct email</span>
-				<p>{emailAddress}</p>
-				<small>No mail app required—copy the address and use it anywhere.</small>
+			<div class="contact-intro">
+				<span>Start a conversation</span>
+				<p>Tell me what you are working through, where it is stuck, and what a useful outcome looks like.</p>
+				<div class="contact-links" aria-label="Professional profiles">
+					<a
+						class="text-link text-link--light"
+						href="https://www.linkedin.com/in/jason-weber-data/"
+						target="_blank"
+						rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
+					>
+					<a
+						class="text-link text-link--light"
+						href="https://github.com/jwebs444"
+						target="_blank"
+						rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
+					>
+				</div>
 			</div>
-			<div class="contact-actions">
-				<button class="button button-light" type="button" on:click={copyEmail}
-					>{copyLabel} <span aria-hidden="true">↗</span></button
-				>
-				<a class="text-link text-link--light" href={`mailto:${emailAddress}`}>Open email app</a>
-				<a
-					class="text-link text-link--light"
-					href="https://www.linkedin.com/in/jason-weber-data/"
-					target="_blank"
-					rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
-				>
-				<a
-					class="text-link text-link--light"
-					href="https://github.com/jwebs444"
-					target="_blank"
-					rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
-				>
-			</div>
+			<form class="inquiry-form" method="POST" action="/api/inquiry" on:submit={submitInquiry}>
+				<div class="form-field">
+					<label for="inquiry-name">Name</label>
+					<input id="inquiry-name" name="name" autocomplete="name" maxlength="100" required />
+				</div>
+				<div class="form-field">
+					<label for="inquiry-email">Email</label>
+					<input
+						id="inquiry-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						maxlength="254"
+						required
+					/>
+				</div>
+				<div class="form-field">
+					<label for="inquiry-organization">Organization <span>Optional</span></label>
+					<input
+						id="inquiry-organization"
+						name="organization"
+						autocomplete="organization"
+						maxlength="120"
+					/>
+				</div>
+				<div class="form-field">
+					<label for="inquiry-topic">What would you like to discuss?</label>
+					<select id="inquiry-topic" name="topic" required>
+						<option value="" disabled selected>Choose a topic</option>
+						{#each inquiryTopics as topic}
+							<option value={topic}>{topic}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="form-field form-field--wide">
+					<label for="inquiry-message">Tell me about the work</label>
+					<textarea
+						id="inquiry-message"
+						name="message"
+						rows="7"
+						minlength="20"
+						maxlength="4000"
+						required
+					></textarea>
+				</div>
+				<div class="bot-trap" aria-hidden="true">
+					<label for="inquiry-website">Website</label>
+					<input id="inquiry-website" name="website" tabindex="-1" autocomplete="off" />
+				</div>
+				{#if turnstileSiteKey}
+					<div
+						class="cf-turnstile"
+						data-sitekey={turnstileSiteKey}
+						data-action="portfolio-inquiry"
+						data-theme="dark"
+						data-size="flexible"
+					></div>
+				{/if}
+				<div class="inquiry-form__footer">
+					<p>Your details are used only to respond to this inquiry.</p>
+					<button
+						class="button button-light"
+						type="submit"
+						disabled={inquiryState === 'submitting' || !turnstileSiteKey}
+					>
+						{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
+						<span aria-hidden="true">→</span>
+					</button>
+				</div>
+				{#if !turnstileSiteKey}
+					<p class="form-status form-status--error" role="status">
+						The inquiry form is temporarily unavailable.
+					</p>
+				{:else if inquiryMessage}
+					<p
+						class:form-status--success={inquiryState === 'success'}
+						class:form-status--error={inquiryState === 'error'}
+						class="form-status"
+						role="status"
+						aria-live="polite">{inquiryMessage}</p
+					>
+				{/if}
+			</form>
 		</div>
-		<p class="sr-only" aria-live="polite">{copyLabel === 'Email copied' ? emailAddress : ''}</p>
 		<p class="contact-note">Full résumé available on request.</p>
 	</section>
 </main>

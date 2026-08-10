@@ -30,7 +30,7 @@
 	<footer class="project-card__footer">
 		<p>{project.proof}</p>
 		<a href={project.href} target="_blank" rel="noreferrer">
-			View repository <span aria-hidden="true">↗</span>
+			{project.linkLabel} <span aria-hidden="true">↗</span>
 		</a>
 	</footer>
 </article>

@@ -1,0 +1,10 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "jobwebsite",
+	"pages_build_output_dir": ".svelte-kit/cloudflare",
+	"compatibility_date": "2026-08-09",
+	"vars": {
+		"PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAAELs_-_ujGf2AJwI",
+		"CLOUDFLARE_ACCOUNT_ID": "3ee1f6cde21583f871bf2bfaf008b665"
+	}
+}

@@ -1,5 +1,8 @@
-<script>
+<script lang="ts">
 	import Main from '../components/Main.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -22,6 +25,8 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image" content="https://thejasonandjasonshow.com/og.png" />
 	<link rel="canonical" href="https://thejasonandjasonshow.com/" />
+	<link rel="preconnect" href="https://challenges.cloudflare.com" />
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </svelte:head>
 
-<Main />
+<Main turnstileSiteKey={data.turnstileSiteKey} />
