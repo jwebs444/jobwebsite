@@ -111,7 +111,7 @@
 		<div class="hero-grid" aria-hidden="true"></div>
 		<div class="hero-copy">
 			<p class="hero-kicker"><span></span> Technology · Operations · Software</p>
-			<h1 id="hero-title">I make complicated work <em>move.</em></h1>
+			<h1 id="hero-title">Make complicated work <em>move.</em></h1>
 			<p class="hero-intro">
 				I’m Jason Weber—an operations leader and software builder who finds the real problem,
 				translates the complexity, and ships a practical way forward.
@@ -132,22 +132,6 @@
 				alt="Jason Weber smiling during a canyon expedition"
 			/>
 			<p class="portrait-caption">Curious by nature.<br />Practical by training.</p>
-		</div>
-	</section>
-
-	<section class="impact section-shell" aria-labelledby="impact-title">
-		<div class="impact-heading">
-			<p class="eyebrow">Selected impact</p>
-			<h2 id="impact-title">Useful outcomes, not decorative metrics.</h2>
-		</div>
-		<div class="impact-grid">
-			{#each selectedImpact as item, index}
-				<article>
-					<p>0{index + 1}</p>
-					<h3>{item.title}</h3>
-					<span>{item.body}</span>
-				</article>
-			{/each}
 		</div>
 	</section>
 
@@ -192,48 +176,19 @@
 		</div>
 	</section>
 
-	<section class="capabilities" id="approach" aria-labelledby="approach-title">
-		<div class="section-shell">
-			<div class="section-heading section-heading--dark">
-				<div>
-					<p class="eyebrow">How I work</p>
-					<h2 id="approach-title">Think deeply. Explain clearly. Build what lasts.</h2>
-				</div>
-				<p>
-					My background crosses kitchens, entrepreneurship, data recovery, industrial operations,
-					and software. The common thread is calm ownership when the path is not obvious.
-				</p>
-			</div>
-
-			<div class="capability-grid">
-				{#each capabilities as capability}
-					<article>
-						<p>{capability.number}</p>
-						<h3>{capability.title}</h3>
-						<span>{capability.body}</span>
-					</article>
-				{/each}
-			</div>
+	<section class="impact section-shell" aria-labelledby="impact-title">
+		<div class="impact-heading">
+			<p class="eyebrow">Selected outcomes</p>
+			<h2 id="impact-title">Useful outcomes, not decorative metrics.</h2>
 		</div>
-	</section>
-
-	<section class="about section-shell" id="about" aria-labelledby="about-title">
-		<div class="about-statement">
-			<p class="eyebrow">Beyond the résumé</p>
-			<h2 id="about-title">Curiosity is not a hobby. It is how I operate.</h2>
-		</div>
-		<div class="about-copy">
-			<p>
-				I studied psychology and philosophy because I wanted to understand people and difficult
-				ideas. I learned kitchens because execution matters. I learned software because a good
-				system can multiply what a team is capable of doing.
-			</p>
-			<p>
-				Outside work, I explore deserts, make photographs, write, and build field tools through
-				<a href="https://mrcrowmeister.com" target="_blank" rel="noreferrer">Mr. Crowmeister</a>.
-				That work has a different audience, but it comes from the same habits: attention,
-				adaptability, and bringing something useful back.
-			</p>
+		<div class="impact-grid">
+			{#each selectedImpact as item, index}
+				<article>
+					<p>0{index + 1}</p>
+					<h3>{item.title}</h3>
+					<span>{item.body}</span>
+				</article>
+			{/each}
 		</div>
 	</section>
 
@@ -266,7 +221,53 @@
 		</div>
 	</section>
 
-	<section class="contact section-shell" id="contact" aria-labelledby="contact-title">
+	<section class="capabilities" id="approach" aria-labelledby="approach-title">
+		<div class="section-shell">
+			<div class="section-heading section-heading--dark">
+				<div>
+					<p class="eyebrow">How I work</p>
+					<h2 id="approach-title">Think deeply. Explain clearly. Build what lasts.</h2>
+				</div>
+				<p>
+					My background crosses kitchens, entrepreneurship, data recovery, industrial operations,
+					and software. The common thread is calm ownership when the path is not obvious.
+				</p>
+			</div>
+
+			<div class="capability-grid">
+				{#each capabilities as capability}
+					<article>
+						<p>{capability.number}</p>
+						<h3>{capability.title}</h3>
+						<span>{capability.body}</span>
+					</article>
+				{/each}
+			</div>
+
+			<div class="about about--integrated" id="about" aria-labelledby="about-title">
+				<div class="about-statement">
+					<p class="eyebrow">Beyond the résumé</p>
+					<h2 id="about-title">Curiosity is not a hobby. It is how I operate.</h2>
+				</div>
+				<div class="about-copy">
+					<p>
+						I studied psychology and philosophy because I wanted to understand people and difficult
+						ideas. I learned kitchens because execution matters. I learned software because a good
+						system can multiply what a team is capable of doing.
+					</p>
+					<p>
+						Outside work, I explore deserts, make photographs, write, and build field tools through
+						<a href="https://mrcrowmeister.com" target="_blank" rel="noreferrer">Mr. Crowmeister</a>.
+						That work has a different audience, but it comes from the same habits: attention,
+						adaptability, and bringing something useful back.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="contact" id="contact" aria-labelledby="contact-title">
+		<div class="contact__inner section-shell">
 		<p class="eyebrow">Let’s talk</p>
 		<h2 id="contact-title">Have a difficult system that needs a practical next move?</h2>
 		<div class="contact-panel">
@@ -372,6 +373,6 @@
 				{/if}
 			</form>
 		</div>
-		<p class="contact-note">Full résumé available on request.</p>
+		</div>
 	</section>
 </main>
