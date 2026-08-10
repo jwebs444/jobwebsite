@@ -70,7 +70,8 @@
 		event.preventDefault();
 		if (turnstileState !== 'ready') {
 			inquiryState = 'error';
-			inquiryMessage = 'Wait for the visible security check to finish, then try again.';
+			inquiryMessage =
+				'The security check is still loading. Wait for it to complete, then submit again.';
 			return;
 		}
 
@@ -397,9 +398,7 @@
 						<button
 							class="button button-light"
 							type="submit"
-							disabled={inquiryState === 'submitting' ||
-								!turnstileSiteKey ||
-								turnstileState !== 'ready'}
+							disabled={inquiryState === 'submitting' || !turnstileSiteKey}
 						>
 							{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
 							<span aria-hidden="true">→</span>
