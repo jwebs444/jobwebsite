@@ -12,7 +12,6 @@
 			<a href="#work">Work</a>
 			<a href="#experience">Experience</a>
 			<a href="#approach">Approach</a>
-			<a href="#about">About</a>
 		</nav>
 
 		<a class="header-cta" href="#contact">Contact <span aria-hidden="true">↘</span></a>

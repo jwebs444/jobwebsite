@@ -3,7 +3,22 @@
 declare global {
 	interface Window {
 		turnstile?: {
+			render: (
+				selector: string,
+				options: {
+					sitekey: string;
+					action?: string;
+					theme?: 'light' | 'dark' | 'auto';
+					size?: 'normal' | 'flexible' | 'compact';
+					appearance?: 'always' | 'execute' | 'interaction-only';
+					callback?: (token: string) => void;
+					'error-callback'?: (code?: string) => void;
+					'expired-callback'?: () => void;
+					'timeout-callback'?: () => void;
+				}
+			) => string;
 			reset: (widgetId?: string) => void;
+			remove: (widgetId: string) => void;
 		};
 	}
 
