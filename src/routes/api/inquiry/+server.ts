@@ -13,7 +13,10 @@ type TurnstileResult = {
 	'error-codes'?: string[];
 };
 
-type EmailError = Error & { code?: string };
+type EmailServiceResult = {
+	success: boolean;
+	errors?: Array<{ code?: number; message?: string }>;
+};
 
 async function verifyTurnstile(token: string, remoteIp: string | undefined): Promise<boolean> {
 	if (!env.TURNSTILE_SECRET_KEY) {
@@ -43,7 +46,7 @@ async function verifyTurnstile(token: string, remoteIp: string | undefined): Pro
 	}
 }
 
-export const POST: RequestHandler = async ({ request, platform, getClientAddress }) => {
+export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	const requestLength = Number(request.headers.get('content-length') ?? 0);
 	if (requestLength > maxRequestBytes) {
 		return json({ ok: false, message: 'That inquiry is too large to submit.' }, { status: 413 });
@@ -83,8 +86,12 @@ export const POST: RequestHandler = async ({ request, platform, getClientAddress
 		);
 	}
 
-	if (!platform?.env.EMAIL) {
-		console.error('Inquiry configuration error', { missing: 'EMAIL binding' });
+	if (!env.CLOUDFLARE_ACCOUNT_ID || !env.CLOUDFLARE_EMAIL_API_TOKEN) {
+		console.error('Inquiry configuration error', {
+			missing: !env.CLOUDFLARE_ACCOUNT_ID
+				? 'CLOUDFLARE_ACCOUNT_ID'
+				: 'CLOUDFLARE_EMAIL_API_TOKEN'
+		});
 		return json(
 			{ ok: false, message: 'The inquiry service is temporarily unavailable. Please try again later.' },
 			{ status: 503 }
@@ -103,26 +110,46 @@ export const POST: RequestHandler = async ({ request, platform, getClientAddress
 	].join('\n');
 
 	try {
-		await platform.env.EMAIL.send({
-			to: recipient,
-			from: { email: sender, name: 'Jason Weber — Portfolio' },
-			replyTo: { email: inquiry.email, name: inquiry.name },
-			subject: `Portfolio inquiry — ${inquiry.topic}`,
-			text
-		});
+		const response = await fetch(
+			`https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,
+			{
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${env.CLOUDFLARE_EMAIL_API_TOKEN}`,
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					to: recipient,
+					from: { address: sender, name: 'Jason Weber — Portfolio' },
+					reply_to: { address: inquiry.email, name: inquiry.name },
+					subject: `Portfolio inquiry — ${inquiry.topic}`,
+					text
+				})
+			}
+		);
+		const result = (await response.json()) as EmailServiceResult;
+
+		if (!response.ok || !result.success) {
+			console.error('Inquiry email failed', {
+				status: response.status,
+				code: result.errors?.[0]?.code ?? 'unknown'
+			});
+			const status = response.status === 429 ? 429 : 502;
+			return json(
+				{ ok: false, message: 'The message could not be sent right now. Please try again shortly.' },
+				{ status }
+			);
+		}
 
 		return json({ ok: true, message: 'Thanks. Your inquiry has been sent.' });
 	} catch (error) {
-		const emailError = error as EmailError;
 		console.error('Inquiry email failed', {
-			code: emailError.code ?? 'unknown',
-			message: emailError.message
+			message: error instanceof Error ? error.message : 'Unknown error'
 		});
 
-		const status = emailError.code === 'E_RATE_LIMIT_EXCEEDED' ? 429 : 502;
 		return json(
 			{ ok: false, message: 'The message could not be sent right now. Please try again shortly.' },
-			{ status }
+			{ status: 502 }
 		);
 	}
 };

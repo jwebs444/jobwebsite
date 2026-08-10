@@ -12,12 +12,7 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		interface Platform {
-			env: Env;
-			context: ExecutionContext;
-			caches: CacheStorage;
-			cf?: IncomingRequestCfProperties;
-		}
+		// interface Platform {}
 	}
 }
 

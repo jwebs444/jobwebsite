@@ -31,8 +31,8 @@ The production build uses SvelteKit's Cloudflare adapter.
 ## Inquiry service
 
 The contact form posts to a SvelteKit server route. It validates the inquiry and
-the Turnstile token before using Cloudflare Email Service to send from
-`inquiries@thejasonandjasonshow.com` to the binding's fixed recipient. The
+the Turnstile token before using the Cloudflare Email Service REST API to send from
+`inquiries@thejasonandjasonshow.com` to the server route's fixed recipient. The
 submitter's address is used only as `Reply-To`.
 
 Before deploying:
@@ -41,7 +41,10 @@ Before deploying:
 2. Create a Turnstile widget for the production and preview hostnames.
 3. Add `PUBLIC_TURNSTILE_SITE_KEY` as a Pages variable.
 4. Add `TURNSTILE_SECRET_KEY` as an encrypted Pages secret.
-5. Deploy with `wrangler pages deploy .svelte-kit/cloudflare --project-name=jobwebsite --branch=main`.
+5. Create an API token scoped to `Email Sending: Edit` for this account.
+6. Add `CLOUDFLARE_EMAIL_API_TOKEN` as an encrypted Pages secret.
+7. Add `CLOUDFLARE_ACCOUNT_ID` as a Pages variable.
+8. Deploy with `wrangler pages deploy .svelte-kit/cloudflare --project-name=jobwebsite --branch=main`.
 
-The `EMAIL` binding is declared in `wrangler.jsonc` and restricted to the sender
-and recipient used by this form. Never commit the Turnstile secret.
+The sender and recipient are fixed in the server route. Never commit the
+Turnstile secret or Email Sending API token.
