@@ -196,6 +196,33 @@
 		</div>
 	</section>
 
+	<section class="capabilities" id="approach" aria-labelledby="approach-title">
+		<div class="section-shell">
+			<div class="section-heading section-heading--dark">
+				<div>
+					<p class="eyebrow">How I work</p>
+					<h2 id="approach-title">Think deeply. Explain clearly. Build what lasts.</h2>
+				</div>
+				<p>
+					Psychology, philosophy, kitchens, entrepreneurship, industrial operations, and software
+					taught me to stay curious and take calm ownership when the path is unclear. Outside work,
+					I explore deserts, make photographs, write, and build field tools through
+					<a href="https://mrcrowmeister.com" target="_blank" rel="noreferrer">Mr. Crowmeister</a>.
+				</p>
+			</div>
+
+			<div class="capability-grid">
+				{#each capabilities as capability}
+					<article>
+						<p>{capability.number}</p>
+						<h3>{capability.title}</h3>
+						<span>{capability.body}</span>
+					</article>
+				{/each}
+			</div>
+		</div>
+	</section>
+
 	<section class="projects section-shell" id="work" aria-labelledby="work-title">
 		<div class="section-heading">
 			<div>
@@ -239,8 +266,8 @@
 
 	<section class="credentials section-shell" aria-labelledby="credentials-title">
 		<div class="credentials-heading">
-			<p class="eyebrow">Outcomes & education</p>
-			<h2 id="credentials-title">What I’ve delivered. What I’ve learned.</h2>
+			<h2 id="credentials-title">Outcomes & Education</h2>
+			<p class="credentials-summary">What I’ve delivered. What I’ve learned.</p>
 		</div>
 		<div class="credentials-columns">
 			<div class="credentials-group">
@@ -293,33 +320,6 @@
 		</div>
 	</section>
 
-	<section class="capabilities" id="approach" aria-labelledby="approach-title">
-		<div class="section-shell">
-			<div class="section-heading section-heading--dark">
-				<div>
-					<p class="eyebrow">How I work</p>
-					<h2 id="approach-title">Think deeply. Explain clearly. Build what lasts.</h2>
-				</div>
-				<p>
-					Psychology, philosophy, kitchens, entrepreneurship, industrial operations, and software
-					taught me to stay curious and take calm ownership when the path is unclear. Outside work,
-					I explore deserts, make photographs, write, and build field tools through
-					<a href="https://mrcrowmeister.com" target="_blank" rel="noreferrer">Mr. Crowmeister</a>.
-				</p>
-			</div>
-
-			<div class="capability-grid">
-				{#each capabilities as capability}
-					<article>
-						<p>{capability.number}</p>
-						<h3>{capability.title}</h3>
-						<span>{capability.body}</span>
-					</article>
-				{/each}
-			</div>
-		</div>
-	</section>
-
 	<section class="contact" id="contact" aria-labelledby="contact-title">
 		<div class="contact__inner section-shell">
 			<p class="eyebrow">Let’s talk</p>
@@ -350,9 +350,7 @@
 					<div class="inquiry-success" role="status" aria-live="polite">
 						<p>Inquiry sent</p>
 						<h3>{inquiryMessage}</h3>
-						<span
-							>I’ll respond as soon as I can. Reload this page if you need to send another inquiry.</span
-						>
+						<span>I’ll respond as soon as I can.</span>
 					</div>
 				{:else}
 					<form class="inquiry-form" method="POST" action="/api/inquiry" on:submit={submitInquiry}>

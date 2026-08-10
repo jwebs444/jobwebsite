@@ -418,13 +418,11 @@ h3 {
 	max-width: 740px;
 }
 
-.section-heading .eyebrow,
-.credentials .eyebrow {
+.section-heading .eyebrow {
 	color: var(--rust-dark);
 }
 
 .section-heading h2,
-.credentials h2,
 .contact h2 {
 	margin-bottom: 0;
 	font-family: Georgia, 'Times New Roman', serif;
@@ -710,13 +708,24 @@ h3 {
 	margin-bottom: 48px;
 }
 
-.credentials-heading .eyebrow {
+.credentials-heading h2 {
 	margin: 0;
+	max-width: 760px;
+	color: var(--rust-dark);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(46px, 5.8vw, 76px);
+	font-weight: 400;
+	letter-spacing: -0.055em;
+	line-height: 0.96;
 }
 
-.credentials-heading h2 {
-	max-width: 760px;
-	font-size: clamp(38px, 4.5vw, 64px);
+.credentials-summary {
+	max-width: 330px;
+	margin: 0 0 5px;
+	color: var(--muted);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(18px, 2vw, 24px);
+	line-height: 1.25;
 	text-align: right;
 }
 
@@ -1222,7 +1231,7 @@ h3 {
 		margin-bottom: 38px;
 	}
 
-	.credentials-heading h2 {
+	.credentials-summary {
 		text-align: left;
 	}
 
