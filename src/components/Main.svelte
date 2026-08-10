@@ -1,16 +1,11 @@
 <script>
-    import Step from "./Step.svelte";
-
-    let steps = [
-        {name: 'Personal Website', icon: "fa-solid fa-user", href:"https://github.com/jwebs444/jobwebsite"},
-        {name: 'Coordinate-based Precipitation Forecaster', icon: "fa-solid fa-cloud-rain", href:"https://github.com/jwebs444/Canyon_rain"},
-        {name: 'Dungeon Crawler', icon: "fa-solid fa-dungeon", href:"https://github.com/jwebs444/DungeonCrawler"}
-    ]
+    import ProjectCard from "./ProjectCard.svelte";
+    import { featuredProjects } from "$lib/projects";
 
     let benefits = [
-        {name: 'a self taught developer.', description: "I embarked on my coding journey during my graduate studies when I discovered R as a powerful tool for analyzing extensive datasets. When faced with funding challenges due to the impact of Covid-19 on my education, I turned to leveraging my programming and analytical skills. Through self-study, I quickly grasped the fundamentals of Python and SQL, marveling at their versatility and user-friendly nature. Determined to transition into the tech industry, I enrolled in a comprehensive boot camp covering Python, SQL, and DevOps to bolster my skill set and enhance my competitiveness as a tech professional. Presently, I'm deepening my expertise in back-end infrastructure while exploring front-end frameworks like Javascript to broaden my technical horizons."},
-        {name: 'a data guru.', description: "I am proficient in an extensive array of data analysis techniques, drawing particular strengths from my expertise in regression and factor analysis. Leveraging years of hands-on experience, I excel in deriving actionable insights from complex datasets, enabling data-driven decision-making. Furthermore, my proficiency extends beyond analysis—I have a proven track record in building and managing relational databases, including overseeing a robust database sourced firsthand from extensive in-person interactions with thousands of participants."},
-        {name: 'an excellant collaborator.', description: "I thrive as both a team player and a leader by consistently fostering strong alliances and synergies. During my professional journey, I've cultivated an extensive web of personal and professional relationships spanning diverse industries. These connections stand as a testament to my ability to forge meaningful partnerships, enabling me to leverage a vast network to achieve collective goals that surpass individual aspirations. My network serves as a cornerstone of my success, empowering me to accomplish multifaceted objectives beyond the scope of solitary endeavors."}
+        {name: 'a self-taught developer.', description: "I embarked on my coding journey during my graduate studies when I discovered R as a powerful tool for analyzing extensive datasets. When faced with funding challenges due to the impact of Covid-19 on my education, I turned to leveraging my programming and analytical skills. Through self-study, I quickly grasped the fundamentals of Python and SQL, marveling at their versatility and user-friendly nature. Determined to transition into the tech industry, I enrolled in a comprehensive boot camp covering Python, SQL, and DevOps to bolster my skill set and enhance my competitiveness as a tech professional. Presently, I'm deepening my expertise in back-end infrastructure while exploring front-end frameworks like JavaScript to broaden my technical horizons."},
+        {name: 'a data specialist.', description: "I am proficient in an extensive array of data analysis techniques, drawing particular strengths from my expertise in regression and factor analysis. Leveraging years of hands-on experience, I excel in deriving actionable insights from complex datasets, enabling data-driven decision-making. Furthermore, my proficiency extends beyond analysis—I have a proven track record in building and managing relational databases, including overseeing a robust database sourced firsthand from extensive in-person interactions with thousands of participants."},
+        {name: 'an excellent collaborator.', description: "I thrive as both a team player and a leader by consistently fostering strong alliances and synergies. During my professional journey, I've cultivated an extensive web of personal and professional relationships spanning diverse industries. These connections stand as a testament to my ability to forge meaningful partnerships, enabling me to leverage a vast network to achieve collective goals that surpass individual aspirations. My network serves as a cornerstone of my success, empowering me to accomplish multifaceted objectives beyond the scope of solitary endeavors."}
     ]
 </script>
 
@@ -22,7 +17,7 @@
             </h2>
 
             <p class="text-base sm:text-lg md:text-xl">
-                My <span class="poppins text-violet-400">favorite tech</span> includes Javascript(SvelteKit), TailwindCSS, FastAPI, Docker, Cloudflare, & PostgresSQL!
+                My <span class="poppins text-violet-400">favorite tools</span> include JavaScript, SvelteKit, Tailwind CSS, FastAPI, Docker, Cloudflare, and PostgreSQL.
             </p>
 
             <a 
@@ -40,67 +35,28 @@
         <div class="relative shadow-2xl grid place-items-center">
             <img
                 src={"images/profile.png"}
-                alt="Profile Picture"
+                alt="Portrait of Jason Weber"
                 class="object-cover z-[2] max-h-[70vh]"
             />
         </div>
     </section>
-    <section class="py-20 lg:py-32 flex flex-col gap-24" id="projects">
-        <div class="flex flex-col gap-2 text-center">
-            <h6 class="text-large sm:text-xl md:text-2xl">
-                A few of my creative endeavors.
-            </h6>
-            <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">
-                Curious to <span class="poppins text-violet-400">see</span> my work?
+    <section class="py-20 lg:py-32" id="projects">
+        <div class="mx-auto max-w-3xl text-center">
+            <p class="poppins text-sm font-semibold uppercase tracking-[0.24em] text-violet-300">
+                Featured work
+            </p>
+            <h3 class="mt-4 font-semibold text-3xl sm:text-4xl md:text-5xl">
+                Projects built around <span class="poppins text-violet-400">real decisions</span>
             </h3>
-       
-        <div class="py-20 grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10">
-            <Step step={steps[0]}>
-                <p>
-                    This website was built with <b/> <strong
-                        class="text-violet-400"
-                        >SvelteKit and TailwindCSS. </strong
-                        > It is maintained and updated through a <strong
-                        class="text-violet-400"
-                        >Github repository </strong
-                        >featuring build, test, and deploy actions. 
-                        Which upon successful completion, deploys the webpage to <strong
-                        class="text-violet-400"
-                        >Cloudflare </strong
-                        >for hosting.
-                </p>
-            </Step>
-            <Step step={steps[1]}>
-                <p>
-                    A <strong
-                        class="text-violet-400"
-                        >Python</strong
-                        > application that utilizes <strong
-                        class="text-violet-400"
-                        >FastAPI to retrieve json structured data</strong
-                        > from the National Weather Service and Open Weather APIs. 
-                        Which then parses the dictionaries for relevant rainfall information and preforms
-                        average calculations between the two data sources before <strong
-                        class="text-violet-400"
-                        >returning a dictionary of forecast data.</strong>
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+                Two Python projects that show how I model systems, integrate external data, improve reliability, and turn feedback into tested code.
+            </p>
+        </div>
 
-                </p>
-            </Step>
-            <Step step={steps[2]}>
-                <p>
-                    A text-based game written in <strong
-                        class="text-violet-400"
-                        >Python</strong
-                    > with an emphasis on OOP.
-                     This code has been <strong
-                     class="text-violet-400"
-                     >peer reviewed</strong> by current software engineers and iterated upon
-                    with a focus on <strong
-                    class="text-violet-400"
-                    >best practices for a production enviroment.</strong>  
-
-                </p>
-            </Step>
+        <div class="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+            {#each featuredProjects as project}
+                <ProjectCard {project} />
+            {/each}
         </div>
     </section>
     <section id="about" class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col gap-16 sm:gap-20 med:gap-24 relative">
@@ -178,7 +134,7 @@
                 <tr class="border-t border-solid border-slate-200">
                     <td
                         class="border-r border-solid border-white pl-4 pr-8 py-4 font-semibold text-sm"
-                        >Progamming Ability</td
+                        >Programming Ability</td
                     >
                     <td><i class="fa-solid fa-check text-slate-500" /></td>
                     <td><i class="fa-solid fa-xmark text-slate-500" /></td>

@@ -1,7 +1,19 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-describe('sum test', () => {
-	it('adds 1 + 2 to equal 3', () => {
-		expect(1 + 2).toBe(3);
+import { featuredProjects } from '$lib/projects';
+
+describe('featured projects', () => {
+	it('presents the two selected portfolio projects', () => {
+		expect(featuredProjects.map(({ title }) => title)).toEqual([
+			'Canyon Rain Forecast Comparator',
+			'DungeonCrawler'
+		]);
+	});
+
+	it('links every project to a secure GitHub repository', () => {
+		for (const project of featuredProjects) {
+			expect(project.href).toMatch(/^https:\/\/github\.com\/jwebs444\//);
+			expect(project.highlights.length).toBeGreaterThanOrEqual(3);
+		}
 	});
 });
