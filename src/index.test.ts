@@ -4,16 +4,16 @@ import { featuredProjects } from '$lib/projects';
 
 describe('featured projects', () => {
 	it('presents the two selected portfolio projects', () => {
-		expect(featuredProjects.map(({ title }) => title)).toEqual([
-			'Canyon Rain Forecast Comparator',
-			'DungeonCrawler'
-		]);
+		expect(featuredProjects.map(({ title }) => title)).toEqual(['Canyon Rain', 'DungeonCrawler']);
 	});
 
-	it('links every project to a secure GitHub repository', () => {
+	it('publishes verifiable details for every featured project', () => {
 		for (const project of featuredProjects) {
 			expect(project.href).toMatch(/^https:\/\/github\.com\/jwebs444\//);
+			expect(project.repository).toMatch(/^jwebs444\//);
 			expect(project.highlights.length).toBeGreaterThanOrEqual(3);
+			expect(project.technologies.length).toBeGreaterThanOrEqual(2);
+			expect(project.proof).toMatch(/test|dependenc|verified/i);
 		}
 	});
 });

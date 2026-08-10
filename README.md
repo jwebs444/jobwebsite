@@ -1,9 +1,15 @@
-# Jason Weber — Developer Portfolio
+# Jason Weber — Professional Portfolio
 
-A SvelteKit and Tailwind CSS portfolio highlighting Jason Weber's software
-development and data background. The featured work focuses on two Python
-projects: a FastAPI precipitation-forecast comparator and a turn-based command
-line game.
+The source for Jason Weber's professional site: an editorial SvelteKit portfolio
+focused on technology leadership, operational problem-solving, and practical
+software delivery.
+
+The site presents:
+
+- Selected Python work with implementation details and test evidence
+- Professional experience spanning technology, operations, virtualization, and hospitality
+- A concise account of Jason's working style, capabilities, and education
+- Direct contact and professional profile links
 
 ## Local development
 
