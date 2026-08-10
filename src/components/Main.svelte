@@ -2,6 +2,31 @@
 	import ProjectCard from './ProjectCard.svelte';
 	import { featuredProjects } from '$lib/projects';
 
+	const emailAddress = 'jwebs444@gmail.com';
+	let copyLabel = 'Copy email address';
+
+	async function copyEmail() {
+		try {
+			if (navigator.clipboard?.writeText) {
+				await navigator.clipboard.writeText(emailAddress);
+			} else {
+				const field = document.createElement('textarea');
+				field.value = emailAddress;
+				field.style.position = 'fixed';
+				field.style.opacity = '0';
+				document.body.appendChild(field);
+				field.select();
+				document.execCommand('copy');
+				field.remove();
+			}
+
+			copyLabel = 'Email copied';
+			window.setTimeout(() => (copyLabel = 'Copy email address'), 2400);
+		} catch {
+			copyLabel = 'Select the address';
+		}
+	}
+
 	const experience = [
 		{
 			period: '2024 — Present',
@@ -16,6 +41,20 @@
 			company: 'Upstart LP',
 			description:
 				'Recovered an active legacy data set from a failing Windows 7 system and served as a trusted technology consultant for a multi-million-dollar investment partnership.'
+		},
+		{
+			period: 'Aug 2020 — Jan 2022',
+			role: 'Graduate Teaching Assistant, Philosophy',
+			company: 'Northern Illinois University',
+			description:
+				'Supported undergraduate philosophy instruction and made complex arguments clearer and more approachable for students.'
+		},
+		{
+			period: 'Aug 2020 — Jan 2022',
+			role: 'Volunteer Data Analyst & Data Manager',
+			company: 'Psychology Research Lab · Northern Illinois University',
+			description:
+				'Contributed volunteer data-analysis and data-management projects in support of the lab’s research work.'
 		},
 		{
 			period: '2018 — 2021',
@@ -71,8 +110,8 @@
 				<a class="button button-primary" href="#work"
 					>Explore my work <span aria-hidden="true">↓</span></a
 				>
-				<a class="text-link" href="mailto:jwebs444@gmail.com"
-					>Start a conversation <span aria-hidden="true">↗</span></a
+				<a class="text-link" href="#contact"
+					>Start a conversation <span aria-hidden="true">↓</span></a
 				>
 			</div>
 		</div>
@@ -81,7 +120,11 @@
 			<div class="portrait-field" aria-hidden="true">
 				<span>Operator</span><span>Builder</span><span>Translator</span>
 			</div>
-			<img src="/images/profile.png" alt="Jason Weber" />
+			<img
+				src="/images/jason-canyon.jpg"
+				alt="Jason Weber smiling during a canyon expedition"
+				fetchpriority="high"
+			/>
 			<p class="portrait-caption">Curious by nature. Practical by training.</p>
 		</div>
 	</section>
@@ -201,23 +244,32 @@
 	<section class="contact section-shell" id="contact" aria-labelledby="contact-title">
 		<p class="eyebrow">Let’s talk</p>
 		<h2 id="contact-title">Have a difficult system that needs a practical next move?</h2>
-		<div class="contact-actions">
-			<a class="button button-light" href="mailto:jwebs444@gmail.com"
-				>Email Jason <span aria-hidden="true">↗</span></a
-			>
-			<a
-				class="text-link text-link--light"
-				href="https://www.linkedin.com/in/jason-weber-data/"
-				target="_blank"
-				rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
-			>
-			<a
-				class="text-link text-link--light"
-				href="https://github.com/jwebs444"
-				target="_blank"
-				rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
-			>
+		<div class="contact-panel">
+			<div class="contact-address">
+				<span>Direct email</span>
+				<p>{emailAddress}</p>
+				<small>No mail app required—copy the address and use it anywhere.</small>
+			</div>
+			<div class="contact-actions">
+				<button class="button button-light" type="button" on:click={copyEmail}
+					>{copyLabel} <span aria-hidden="true">↗</span></button
+				>
+				<a class="text-link text-link--light" href={`mailto:${emailAddress}`}>Open email app</a>
+				<a
+					class="text-link text-link--light"
+					href="https://www.linkedin.com/in/jason-weber-data/"
+					target="_blank"
+					rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a
+				>
+				<a
+					class="text-link text-link--light"
+					href="https://github.com/jwebs444"
+					target="_blank"
+					rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a
+				>
+			</div>
 		</div>
+		<p class="sr-only" aria-live="polite">{copyLabel === 'Email copied' ? emailAddress : ''}</p>
 		<p class="contact-note">Full résumé available on request.</p>
 	</section>
 </main>

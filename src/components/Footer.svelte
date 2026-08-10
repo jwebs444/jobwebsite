@@ -5,7 +5,7 @@
 			<p>Technology, operations, and software—with the difficult parts made clear.</p>
 		</div>
 		<nav aria-label="Footer navigation">
-			<a href="mailto:jwebs444@gmail.com">Email</a>
+			<a href="#contact">Contact</a>
 			<a href="https://www.linkedin.com/in/jason-weber-data/" target="_blank" rel="noreferrer"
 				>LinkedIn</a
 			>
