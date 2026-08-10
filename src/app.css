@@ -25,6 +25,7 @@ html {
 
 body {
 	margin: 0;
+	overflow-x: clip;
 	background: var(--paper);
 	color: var(--ink);
 	font-family:
@@ -759,6 +760,29 @@ h3 {
 	align-items: start;
 }
 
+.about--integrated {
+	margin-top: 96px;
+	padding: 88px 0 0;
+	border-top: 1px solid var(--line-dark);
+}
+
+.about--integrated .eyebrow {
+	color: var(--sky);
+}
+
+.about--integrated .about-copy {
+	border-color: var(--line-dark);
+}
+
+.about--integrated .about-copy p {
+	color: #b8c0c0;
+}
+
+.about--integrated .about-copy a {
+	border-color: var(--sky);
+	color: var(--sky-light);
+}
+
 .about-copy {
 	padding-top: 34px;
 	border-top: 1px solid var(--ink);
@@ -825,26 +849,21 @@ h3 {
 
 .contact {
 	position: relative;
+	width: 100%;
 	overflow: hidden;
 	padding-block: 105px;
+	background: var(--rust);
 	color: var(--white);
 }
 
-.contact::before {
-	position: absolute;
-	z-index: -2;
-	top: 0;
-	left: 50%;
-	width: 100vw;
-	height: 100%;
-	background: var(--rust);
-	content: '';
-	transform: translateX(-50%);
+.contact__inner {
+	position: relative;
+	z-index: 1;
 }
 
 .contact::after {
 	position: absolute;
-	z-index: -1;
+	z-index: 0;
 	top: -220px;
 	right: -70px;
 	width: 560px;
@@ -855,6 +874,7 @@ h3 {
 		0 0 0 72px rgba(255, 255, 255, 0.06),
 		0 0 0 144px rgba(255, 255, 255, 0.04);
 	content: '';
+	pointer-events: none;
 }
 
 .contact .eyebrow {
@@ -1019,8 +1039,12 @@ h3 {
 }
 
 .form-status--success {
+	padding: 22px 24px;
 	color: #bcf0d6;
 	background: rgba(41, 153, 103, 0.15);
+	font-family: Georgia, 'Times New Roman', serif;
+	font-size: clamp(22px, 2.5vw, 32px);
+	line-height: 1.25;
 }
 
 .form-status--error {
@@ -1043,12 +1067,6 @@ h3 {
 .text-link--light:hover {
 	border-color: #fff;
 	color: #fff;
-}
-
-.contact-note {
-	margin: 28px 0 0;
-	color: #ffe0d2;
-	font-size: 12px;
 }
 
 .site-footer {
@@ -1099,6 +1117,10 @@ h3 {
 
 	.capability-grid {
 		grid-template-columns: 1fr 1fr;
+	}
+
+	.contact-panel {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -1222,6 +1244,11 @@ h3 {
 
 	.about-copy {
 		padding-top: 28px;
+	}
+
+	.about--integrated {
+		margin-top: 64px;
+		padding: 64px 0 0;
 	}
 
 	.contact {

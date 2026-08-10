@@ -14,7 +14,7 @@
 	<meta property="og:title" content="Jason Weber | Technology, Operations & Software" />
 	<meta
 		property="og:description"
-		content="I make complicated work move—through clearer systems, useful software, and practical leadership."
+		content="Make complicated work move—through clearer systems, useful software, and practical leadership."
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://thejasonandjasonshow.com/" />
