@@ -2,7 +2,8 @@
 	import ProjectCard from './ProjectCard.svelte';
 	import { featuredProjects } from '$lib/projects';
 	import { inquiryTopics } from '$lib/inquiry';
-	import { env } from '$env/dynamic/public';
+
+	export let turnstileSiteKey = '';
 
 	let inquiryState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
 	let inquiryMessage = '';
@@ -336,10 +337,10 @@
 					<label for="inquiry-website">Website</label>
 					<input id="inquiry-website" name="website" tabindex="-1" autocomplete="off" />
 				</div>
-				{#if env.PUBLIC_TURNSTILE_SITE_KEY}
+				{#if turnstileSiteKey}
 					<div
 						class="cf-turnstile"
-						data-sitekey={env.PUBLIC_TURNSTILE_SITE_KEY}
+						data-sitekey={turnstileSiteKey}
 						data-action="portfolio-inquiry"
 						data-theme="dark"
 						data-size="flexible"
@@ -350,13 +351,13 @@
 					<button
 						class="button button-light"
 						type="submit"
-						disabled={inquiryState === 'submitting' || !env.PUBLIC_TURNSTILE_SITE_KEY}
+						disabled={inquiryState === 'submitting' || !turnstileSiteKey}
 					>
 						{inquiryState === 'submitting' ? 'Sending…' : 'Submit inquiry'}
 						<span aria-hidden="true">→</span>
 					</button>
 				</div>
-				{#if !env.PUBLIC_TURNSTILE_SITE_KEY}
+				{#if !turnstileSiteKey}
 					<p class="form-status form-status--error" role="status">
 						The inquiry form is temporarily unavailable.
 					</p>
