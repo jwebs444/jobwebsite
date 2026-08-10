@@ -26,7 +26,10 @@
 	<meta name="twitter:image" content="https://thejasonandjasonshow.com/og.png" />
 	<link rel="canonical" href="https://thejasonandjasonshow.com/" />
 	<link rel="preconnect" href="https://challenges.cloudflare.com" />
-	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	<script
+		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+		defer
+	></script>
 </svelte:head>
 
 <Main turnstileSiteKey={data.turnstileSiteKey} />
