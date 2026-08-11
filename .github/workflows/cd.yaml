@@ -37,6 +37,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNTID }}
-          command: pages deploy .svelte-kit/cloudflare --project-name=jobwebsite --branch=main
+          command: pages deploy .svelte-kit/cloudflare --project-name=jasonweber-me --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: '4'

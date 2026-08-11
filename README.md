@@ -1,4 +1,4 @@
-# Jason Weber — Professional Portfolio
+# JasonWeber.me — Professional Portfolio
 
 The source for Jason Weber's professional site: an editorial SvelteKit portfolio
 focused on technology leadership, operational problem-solving, and practical
@@ -44,7 +44,7 @@ Before deploying:
 5. Create an API token scoped to `Email Sending: Edit` for this account.
 6. Add `CLOUDFLARE_EMAIL_API_TOKEN` as an encrypted Pages secret.
 7. Add `CLOUDFLARE_ACCOUNT_ID` as a Pages variable.
-8. Deploy with `wrangler pages deploy .svelte-kit/cloudflare --project-name=jobwebsite --branch=main`.
+8. Deploy with `wrangler pages deploy .svelte-kit/cloudflare --project-name=jasonweber-me --branch=main`.
 
 The sender and recipient are fixed in the server route. Never commit the
 Turnstile secret or Email Sending API token.
