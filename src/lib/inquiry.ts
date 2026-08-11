@@ -15,11 +15,10 @@ export type Inquiry = {
 	message: string;
 };
 
-export type InquiryResult =
-	| { ok: true; inquiry: Inquiry }
-	| { ok: false; message: string };
+export type InquiryResult = { ok: true; inquiry: Inquiry } | { ok: false; message: string };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// eslint-disable-next-line no-control-regex -- Header control characters are intentionally rejected.
 const unsafeHeaderPattern = /[\r\n\u0000-\u001f\u007f]/;
 
 function field(form: FormData, name: string): string {
@@ -38,7 +37,12 @@ export function parseInquiry(form: FormData): InquiryResult {
 		return { ok: false, message: 'Enter your name using 100 characters or fewer.' };
 	}
 
-	if (!email || email.length > 254 || unsafeHeaderPattern.test(email) || !emailPattern.test(email)) {
+	if (
+		!email ||
+		email.length > 254 ||
+		unsafeHeaderPattern.test(email) ||
+		!emailPattern.test(email)
+	) {
 		return { ok: false, message: 'Enter a valid email address.' };
 	}
 

@@ -2,9 +2,8 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: ["Build and Test"]
+    workflows: ['Check and Test']
     types: [completed]
-
 
 jobs:
   publish:

@@ -16,19 +16,20 @@
 	<p class="project-summary">{project.summary}</p>
 
 	<ul class="project-highlights">
-		{#each project.highlights as highlight}
+		{#each project.highlights as highlight (highlight)}
 			<li><span aria-hidden="true">↳</span>{highlight}</li>
 		{/each}
 	</ul>
 
 	<div class="tag-list" aria-label="Technologies used">
-		{#each project.technologies as technology}
+		{#each project.technologies as technology (technology)}
 			<span>{technology}</span>
 		{/each}
 	</div>
 
 	<footer class="project-card__footer">
 		<p>{project.proof}</p>
+		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- URL is an external project link. -->
 		<a href={project.href} target="_blank" rel="noreferrer">
 			{project.linkLabel} <span aria-hidden="true">↗</span>
 		</a>

@@ -212,7 +212,7 @@
 			</div>
 
 			<div class="capability-grid">
-				{#each capabilities as capability}
+				{#each capabilities as capability (capability.number)}
 					<article>
 						<p>{capability.number}</p>
 						<h3>{capability.title}</h3>
@@ -236,7 +236,7 @@
 		</div>
 
 		<div class="project-grid">
-			{#each featuredProjects as project}
+			{#each featuredProjects as project (project.href)}
 				<ProjectCard {project} />
 			{/each}
 		</div>
@@ -251,7 +251,7 @@
 		</div>
 
 		<div class="timeline">
-			{#each experience as item}
+			{#each experience as item (item.period)}
 				<article class="timeline-item">
 					<p class="timeline-period">{item.period}</p>
 					<div class="timeline-role">
@@ -273,7 +273,7 @@
 			<div class="credentials-group">
 				<p class="credentials-label">Selected outcomes</p>
 				<div class="outcome-list">
-					{#each selectedImpact as item, index}
+					{#each selectedImpact as item, index (item.title)}
 						<article>
 							<p>0{index + 1}</p>
 							<div>
@@ -382,7 +382,7 @@
 							<label for="inquiry-topic">What would you like to discuss?</label>
 							<select id="inquiry-topic" name="topic" required>
 								<option value="" disabled selected>Choose a topic</option>
-								{#each inquiryTopics as topic}
+								{#each inquiryTopics as topic (topic)}
 									<option value={topic}>{topic}</option>
 								{/each}
 							</select>
@@ -395,8 +395,7 @@
 								rows="7"
 								minlength="20"
 								maxlength="4000"
-								required
-							></textarea>
+								required></textarea>
 						</div>
 						<div class="bot-trap" aria-hidden="true">
 							<label for="inquiry-website">Website</label>

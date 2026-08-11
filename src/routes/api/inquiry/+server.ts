@@ -69,7 +69,10 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
 	const turnstileToken = String(form.get('cf-turnstile-response') ?? '');
 	if (!turnstileToken || turnstileToken.length > 2048) {
-		return json({ ok: false, message: 'Complete the security check and try again.' }, { status: 400 });
+		return json(
+			{ ok: false, message: 'Complete the security check and try again.' },
+			{ status: 400 }
+		);
 	}
 
 	let remoteIp: string | undefined;
@@ -81,19 +84,23 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
 	if (!(await verifyTurnstile(turnstileToken, remoteIp))) {
 		return json(
-			{ ok: false, message: 'The security check expired or could not be verified. Please try again.' },
+			{
+				ok: false,
+				message: 'The security check expired or could not be verified. Please try again.'
+			},
 			{ status: 400 }
 		);
 	}
 
 	if (!env.CLOUDFLARE_ACCOUNT_ID || !env.CLOUDFLARE_EMAIL_API_TOKEN) {
 		console.error('Inquiry configuration error', {
-			missing: !env.CLOUDFLARE_ACCOUNT_ID
-				? 'CLOUDFLARE_ACCOUNT_ID'
-				: 'CLOUDFLARE_EMAIL_API_TOKEN'
+			missing: !env.CLOUDFLARE_ACCOUNT_ID ? 'CLOUDFLARE_ACCOUNT_ID' : 'CLOUDFLARE_EMAIL_API_TOKEN'
 		});
 		return json(
-			{ ok: false, message: 'The inquiry service is temporarily unavailable. Please try again later.' },
+			{
+				ok: false,
+				message: 'The inquiry service is temporarily unavailable. Please try again later.'
+			},
 			{ status: 503 }
 		);
 	}
@@ -136,7 +143,10 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 			});
 			const status = response.status === 429 ? 429 : 502;
 			return json(
-				{ ok: false, message: 'The message could not be sent right now. Please try again shortly.' },
+				{
+					ok: false,
+					message: 'The message could not be sent right now. Please try again shortly.'
+				},
 				{ status }
 			);
 		}
