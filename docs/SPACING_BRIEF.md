@@ -2,6 +2,13 @@
 
 Date: 2026-08-11
 
+## Content-density follow-up
+
+The second pass turns mobile navigation into an anchored section bar, removes the
+How I Work chapter on phones, compresses each selected-work card below one mobile
+screen, and places Education before Outcomes on phones. The 2K grammar now uses a
+tighter shell and shorter project chapters instead of enlarging laptop spacing.
+
 ## Review record
 
 - Repository: `jwebs444/JasonWeber.me`
