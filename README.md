@@ -32,12 +32,12 @@ The production build uses SvelteKit's Cloudflare adapter.
 
 The contact form posts to a SvelteKit server route. It validates the inquiry and
 the Turnstile token before using the Cloudflare Email Service REST API to send from
-`inquiries@thejasonandjasonshow.com` to the server route's fixed recipient. The
+`inquiries@jasonweber.me` to the server route's fixed recipient. The
 submitter's address is used only as `Reply-To`.
 
 Before deploying:
 
-1. In Cloudflare Email Service, onboard `thejasonandjasonshow.com` for Email Sending.
+1. In Cloudflare Email Service, onboard `jasonweber.me` for Email Sending.
 2. Create a Turnstile widget for the production and preview hostnames.
 3. Add `PUBLIC_TURNSTILE_SITE_KEY` as a Pages variable.
 4. Add `TURNSTILE_SECRET_KEY` as an encrypted Pages secret.

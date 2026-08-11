@@ -17,14 +17,14 @@
 		content="Make complicated work move—through clearer systems, useful software, and practical leadership."
 	/>
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://thejasonandjasonshow.com/" />
-	<meta property="og:image" content="https://thejasonandjasonshow.com/og.png" />
+	<meta property="og:url" content="https://jasonweber.me/" />
+	<meta property="og:image" content="https://jasonweber.me/og.png" />
 	<meta property="og:image:width" content="1536" />
 	<meta property="og:image:height" content="1024" />
 	<meta property="og:image:alt" content="Jason Weber — Technology, Operations, Software" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="https://thejasonandjasonshow.com/og.png" />
-	<link rel="canonical" href="https://thejasonandjasonshow.com/" />
+	<meta name="twitter:image" content="https://jasonweber.me/og.png" />
+	<link rel="canonical" href="https://jasonweber.me/" />
 	<link rel="preconnect" href="https://challenges.cloudflare.com" />
 	<script
 		src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
