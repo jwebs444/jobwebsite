@@ -9,6 +9,13 @@ How I Work chapter on phones, compresses each selected-work card below one mobil
 screen, and places Education before Outcomes on phones. The 2K grammar now uses a
 tighter shell and shorter project chapters instead of enlarging laptop spacing.
 
+## Follow-up corrections
+
+- Removed the Work/Experience mobile tab row while preserving the sticky identity
+  header and Contact action.
+- Protected DungeonCrawler as one mobile title line and updated the canyoneering
+  education provider wording.
+
 ## Review record
 
 - Repository: `jwebs444/JasonWeber.me`
