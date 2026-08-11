@@ -305,7 +305,7 @@
 						<p>2022</p>
 						<div>
 							<h3>Canyoneering Leadership & Rescue</h3>
-							<span>Uber Adventures Accredited Canyoneering Program</span>
+							<span>Uber Adventures on behalf of Association for Canyoneering Education</span>
 						</div>
 					</article>
 					<article>
