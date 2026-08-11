@@ -3,7 +3,7 @@ import { parseInquiry } from '$lib/inquiry';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
-const sender = 'inquiries@thejasonandjasonshow.com';
+const sender = 'inquiries@jasonweber.me';
 const recipient = 'jwebs444@gmail.com';
 const maxRequestBytes = 20_000;
 
