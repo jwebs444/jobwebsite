@@ -288,10 +288,10 @@
 				<p class="credentials-label">Education</p>
 				<div class="education-list">
 					<article>
-						<p>2023</p>
+						<p>2018 — 2022</p>
 						<div>
-							<h3>Python, SQL & DevOps Bootcamp</h3>
-							<span>NuCamp</span>
+							<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
+							<span>Northern Illinois University</span>
 						</div>
 					</article>
 					<article>
@@ -309,10 +309,10 @@
 						</div>
 					</article>
 					<article>
-						<p>2018 — 2022</p>
+						<p>2023</p>
 						<div>
-							<h3>Bachelor’s degrees in Psychology & Philosophy</h3>
-							<span>Northern Illinois University</span>
+							<h3>Python, SQL & DevOps Bootcamp</h3>
+							<span>NuCamp</span>
 						</div>
 					</article>
 				</div>
