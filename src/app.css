@@ -96,11 +96,13 @@ h3 {
 }
 
 .site-header {
-	position: absolute;
+	position: sticky;
 	z-index: 20;
 	top: 0;
 	left: 0;
 	width: 100%;
+	background: rgba(16, 24, 29, 0.98);
+	backdrop-filter: blur(14px);
 	color: var(--white);
 }
 
@@ -201,11 +203,11 @@ h3 {
 .hero {
 	position: relative;
 	display: grid;
-	min-height: 820px;
+	min-height: max(718px, calc(100svh - 102px));
 	grid-template-columns: minmax(0, 1.08fr) minmax(390px, 0.92fr);
 	align-items: center;
 	gap: clamp(52px, 7vw, 110px);
-	padding-top: 155px;
+	padding-top: 53px;
 	padding-bottom: 80px;
 	background: var(--ink);
 	box-shadow: 0 0 0 100vmax var(--ink);
@@ -1549,7 +1551,7 @@ h3 {
 
 @media (min-width:2000px) and (min-height:900px) {
 	:root { --shell:clamp(1440px,64vw,1840px); }
-	.hero { min-height:100svh; padding-top:132px; padding-bottom:72px; }
+	.hero { min-height:calc(100svh - 102px); padding-top:60px; padding-bottom:60px; }
 	.hero h1 { font-size:clamp(104px,4.6vw,132px); }
 	.hero-portrait { min-height:clamp(600px,49svh,820px); }
 	.projects,.experience,.capabilities { padding-block:96px; }

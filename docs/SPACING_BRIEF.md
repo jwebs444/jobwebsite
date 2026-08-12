@@ -111,3 +111,12 @@ height is intentionally relaxed for those states and for browser zoom.
 - Adversarial source/measurement review: Ready with notes. The independent
   reviewer could not obtain its own browser backend, so root-rendered crop,
   section-reveal, and state evidence remains the visual record.
+
+## August 11 desktop navigation follow-up
+
+- The 102-pixel desktop header is sticky, with an opaque blurred ink surface;
+  its Contact action remains a 44-pixel target and stays visible while scrolling.
+- At 2560 x 1440 the header occupies y=0-102 and the hero occupies y=102-1440,
+  preserving an exact first-screen composition without overlaying hero content.
+- The 72-pixel phone header remains sticky and the document has no horizontal
+  overflow at 375 pixels rendered width.
