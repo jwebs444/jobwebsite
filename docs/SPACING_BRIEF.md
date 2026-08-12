@@ -1,5 +1,9 @@
 # JasonWeber.me Responsive Spacing Brief
 
+Product status: accepted complete on 2026-08-12. Preserve this brief as a
+regression record; later non-blocking observations do not reopen the product
+without a new owner request or reproduced reliability/accessibility defect.
+
 Date: 2026-08-11
 
 ## Content-density follow-up
