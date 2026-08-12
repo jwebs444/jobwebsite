@@ -119,6 +119,8 @@ height is intentionally relaxed for those states and for browser zoom.
 - At 2560 x 1440 the 102-pixel header, compact hero, and complete How I work
   section form one opening screen; Selected work begins at the fold instead of
   requiring a second screen after the hero.
+- The same combined opening has a denser 1000-1199-pixel-height treatment for
+  2K monitors after browser chrome reduces the page's usable CSS viewport.
 - The 72-pixel phone header remains sticky and the document has no horizontal
   overflow at 375 pixels rendered width.
 - Wide short viewports above 1050 pixels now subtract the 72-pixel sticky header
