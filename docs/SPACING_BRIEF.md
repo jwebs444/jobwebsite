@@ -126,3 +126,26 @@ height is intentionally relaxed for those states and for browser zoom.
 - Wide short viewports above 1050 pixels now subtract the 72-pixel sticky header
   from the hero budget and center the complete hero message and actions in the
   remaining screen instead of anchoring the kicker at the bottom edge.
+
+## Owner challenge replay and review correction
+
+- A 2560 x 1440 render did not close the owner's “2K monitor” challenge. The
+  maximized 2048 x 1152 monitor exposed a 2048 x 1052 CSS viewport after browser
+  chrome, below the first candidate's 1200-pixel height query. The live revision
+  `67c81e7` now measures header y=0-102, hero y=102-691, and complete How I work
+  y=691-1051 with no horizontal overflow.
+- Future reviews must test both 2560 x 1440 and the browser-reduced 2048-wide
+  canvas. The last required approach card—not the hero bottom—is the acceptance
+  boundary.
+- Desktop keeps the identity header and Contact action sticky. Work, Experience,
+  and Approach must not become a persistent mobile tab bar. Mobile continues to
+  hide How I work, place Education before Outcomes, keep normal selected-work
+  cards within one phone screen, and protect long titles from single-letter
+  orphans.
+- The earlier “Ready with notes” source review is historical evidence, not an
+  independent visual pass: its browser backend was unavailable. Under the
+  current adversarial standard that outcome is **Review incomplete** until the
+  owner challenges are independently rendered.
+- Candidate, Cloudflare pull-request preview, merged commit, production workflow,
+  and custom-domain result are separate states. The branch preview failed while
+  the authorized post-merge production deployment and live verification passed.
