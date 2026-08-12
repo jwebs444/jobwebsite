@@ -7,9 +7,11 @@
 - Live domain: `jasonweber.me`.
 - Job: present Jason as a technology, operations, and software leader and make a
   serious inquiry easy.
-- Site Steward owns later changes to hierarchy, portrait treatment, typography,
-  navigation behavior, and responsive composition. Maintenance owns content,
-  dependencies, form delivery, Pages configuration, and bounded defects.
+- Maintenance is the normal post-acceptance manager and owns content,
+  dependencies, form delivery, Pages configuration, and bounded established-
+  pattern defects. Significant changes to hierarchy, portrait treatment,
+  typography, navigation behavior, or multiple responsive compositions require
+  a newly briefed Site Steward; full-site regeneration returns to the Generator.
 
 ## Product grammar
 
