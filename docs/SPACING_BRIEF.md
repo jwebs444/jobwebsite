@@ -116,8 +116,9 @@ height is intentionally relaxed for those states and for browser zoom.
 
 - The 102-pixel desktop header is sticky, with an opaque blurred ink surface;
   its Contact action remains a 44-pixel target and stays visible while scrolling.
-- At 2560 x 1440 the header occupies y=0-102 and the hero occupies y=102-1440,
-  preserving an exact first-screen composition without overlaying hero content.
+- At 2560 x 1440 the 102-pixel header, compact hero, and complete How I work
+  section form one opening screen; Selected work begins at the fold instead of
+  requiring a second screen after the hero.
 - The 72-pixel phone header remains sticky and the document has no horizontal
   overflow at 375 pixels rendered width.
 - Wide short viewports above 1050 pixels now subtract the 72-pixel sticky header
