@@ -120,3 +120,6 @@ height is intentionally relaxed for those states and for browser zoom.
   preserving an exact first-screen composition without overlaying hero content.
 - The 72-pixel phone header remains sticky and the document has no horizontal
   overflow at 375 pixels rendered width.
+- Wide short viewports above 1050 pixels now subtract the 72-pixel sticky header
+  from the hero budget and center the complete hero message and actions in the
+  remaining screen instead of anchoring the kicker at the bottom edge.
