@@ -44,6 +44,11 @@ The detailed measurement and owner replay history is in
 - `main` is production source. Treat PR preview, merged commit, production Pages
   deployment, and custom-domain verification as separate states; a failed PR
   preview does not prove the production workflow failed.
+- Approved website/social card: `static/og.png`, 1536 x 1024, canyon portrait
+  treatment; canonical portfolio copy is in the universal Image Assets library.
+- Social metadata appends the approved asset fingerprint
+  `?v=02c74beb9e6a`; update it whenever the approved card bytes change so link
+  preview caches receive a new image URL.
 
 ## Low-input defaults
 

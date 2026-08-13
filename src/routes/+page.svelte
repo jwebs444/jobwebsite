@@ -18,12 +18,12 @@
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://jasonweber.me/" />
-	<meta property="og:image" content="https://jasonweber.me/og.png" />
+	<meta property="og:image" content="https://jasonweber.me/og.png?v=02c74beb9e6a" />
 	<meta property="og:image:width" content="1536" />
 	<meta property="og:image:height" content="1024" />
 	<meta property="og:image:alt" content="Jason Weber — Technology, Operations, Software" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:image" content="https://jasonweber.me/og.png" />
+	<meta name="twitter:image" content="https://jasonweber.me/og.png?v=02c74beb9e6a" />
 	<link rel="canonical" href="https://jasonweber.me/" />
 	<link rel="preconnect" href="https://challenges.cloudflare.com" />
 	<script
