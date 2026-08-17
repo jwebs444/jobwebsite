@@ -56,3 +56,21 @@ Future roles may resolve implementation, spacing, cache, and breakpoint details
 from rendered evidence without asking the owner. Ask only for changed career
 facts, a materially different professional narrative, new private content, or
 ungranted publication authority.
+
+## Search discovery record
+
+- Discovery posture: broadly indexable single-route professional profile at
+  `https://jasonweber.me/`; no keyword-variant or thin supporting routes.
+- Route ownership: `/` owns Jason Weber branded searches and the combined
+  technology, operations, software, work-evidence, experience, and serious-
+  inquiry job. Anchors remain sections of that one canonical page.
+- Crawl/index contract: public crawling allowed; explicit `index, follow` with
+  large image previews; `robots.txt` advertises the canonical XML sitemap.
+- Canonical contract: the root URL is self-canonical and is the only URL in the
+  sitemap. Social URL and structured data use the same HTTPS host and trailing
+  slash.
+- Structured data: a `ProfilePage` connects the visible Jason Weber `Person`
+  and the canonical `WebSite`; public LinkedIn/GitHub profiles and the visible
+  portrait are the only identity references.
+- Social metadata remains a separate public surface and continues to use the
+  approved versioned `static/og.png` card.
