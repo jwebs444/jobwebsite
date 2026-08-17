@@ -3,15 +3,18 @@
 ## Status and purpose
 
 - Product state: accepted complete, 2026-08-12; stable maintenance.
+- Toolset: Traditional.
 - Repository/live branch: `jwebs444/JasonWeber.me`, `main`.
 - Live domain: `jasonweber.me`.
 - Job: present Jason as a technology, operations, and software leader and make a
   serious inquiry easy.
-- Maintenance is the normal post-acceptance manager and owns content,
-  dependencies, form delivery, Pages configuration, and bounded established-
-  pattern defects. Significant changes to hierarchy, portrait treatment,
-  typography, navigation behavior, or multiple responsive compositions require
-  a newly briefed Site Steward; full-site regeneration returns to the Generator.
+- Bounded post-acceptance content, dependency, form-delivery, Pages-
+  configuration, and established-pattern repair may be delegated directly to
+  the property's Traditional Site Steward or the Personal Web Builder Brain.
+  Significant changes to hierarchy, portrait treatment, typography, navigation
+  behavior, or multiple responsive compositions require a newly briefed
+  Traditional Site Steward; full-site regeneration returns to the Traditional
+  Generator.
 
 ## Product grammar
 
