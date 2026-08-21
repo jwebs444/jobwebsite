@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ProjectCard from './ProjectCard.svelte';
-	import { featuredProjects } from '$lib/projects';
+	import { featuredProjects, projectGroups, type ProjectGroupId } from '$lib/projects';
 	import { inquiryTopics } from '$lib/inquiry';
 
 	export let turnstileSiteKey = '';
+
+	const projectsForGroup = (groupId: ProjectGroupId) =>
+		featuredProjects.filter((project) => project.group === groupId);
 
 	let inquiryState: 'idle' | 'submitting' | 'success' | 'error' = 'idle';
 	let inquiryMessage = '';
@@ -235,9 +238,20 @@
 			</p>
 		</div>
 
-		<div class="project-grid">
-			{#each featuredProjects as project (project.href)}
-				<ProjectCard {project} />
+		<div class="project-collections">
+			{#each projectGroups as group (group.id)}
+				<section class="project-collection" aria-labelledby={`project-group-${group.id}`}>
+					<header class="project-collection__heading">
+						<h3 id={`project-group-${group.id}`}>{group.label}</h3>
+						<p>{group.description}</p>
+					</header>
+
+					<div class="project-grid" class:project-grid--trio={group.id === 'public-systems'}>
+						{#each projectsForGroup(group.id) as project (project.href)}
+							<ProjectCard {project} />
+						{/each}
+					</div>
+				</section>
 			{/each}
 		</div>
 	</section>

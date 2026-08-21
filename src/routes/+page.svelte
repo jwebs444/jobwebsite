@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Main from '../components/Main.svelte';
+	import { featuredProjects } from '$lib/projects';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -23,7 +24,21 @@
 					'Jason Weber is a technology and operations leader who builds software, improves systems, and makes complex work easier to run.',
 				isPartOf: { '@id': 'https://jasonweber.me/#website' },
 				mainEntity: { '@id': 'https://jasonweber.me/#jason-weber' },
+				hasPart: { '@id': 'https://jasonweber.me/#selected-work' },
 				inLanguage: 'en-US'
+			},
+			{
+				'@type': 'ItemList',
+				'@id': 'https://jasonweber.me/#selected-work',
+				name: 'Selected work by Jason Weber',
+				numberOfItems: featuredProjects.length,
+				itemListElement: featuredProjects.map((project, index) => ({
+					'@type': 'ListItem',
+					position: index + 1,
+					name: project.title,
+					description: project.summary,
+					url: project.href
+				}))
 			},
 			{
 				'@type': 'Person',

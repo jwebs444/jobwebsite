@@ -6,7 +6,7 @@ software delivery.
 
 The site presents:
 
-- Selected Python work with implementation details and test evidence
+- Five selected projects spanning public field systems and focused software repositories
 - Professional experience spanning technology, operations, virtualization, and hospitality
 - A concise account of Jason's working style, capabilities, and education
 - A server-submitted inquiry form with Cloudflare Turnstile protection

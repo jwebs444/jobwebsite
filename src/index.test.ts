@@ -1,15 +1,22 @@
 import { describe, expect, it } from 'vitest';
 
-import { featuredProjects } from '$lib/projects';
+import { featuredProjects, projectGroups } from '$lib/projects';
 
 describe('featured projects', () => {
-	it('presents the four selected portfolio projects', () => {
+	it('presents the five selected portfolio projects in the approved order', () => {
 		expect(featuredProjects.map(({ title }) => title)).toEqual([
 			'Roost Atlas',
+			'PerchPoints',
 			'Mr. Crowmeister',
 			'Canyon Rain',
 			'DungeonCrawler'
 		]);
+	});
+
+	it('keeps the related public systems distinct from the focused software builds', () => {
+		expect(projectGroups.map(({ id }) => id)).toEqual(['public-systems', 'software-builds']);
+		expect(featuredProjects.filter(({ group }) => group === 'public-systems')).toHaveLength(3);
+		expect(featuredProjects.filter(({ group }) => group === 'software-builds')).toHaveLength(2);
 	});
 
 	it('publishes verifiable details for every featured project', () => {
@@ -20,5 +27,11 @@ describe('featured projects', () => {
 			expect(project.technologies.length).toBeGreaterThanOrEqual(2);
 			expect(project.proof.length).toBeGreaterThan(20);
 		}
+	});
+
+	it('publishes the canonical PerchPoints destination', () => {
+		expect(featuredProjects.find(({ title }) => title === 'PerchPoints')?.href).toBe(
+			'https://perchpoints.com'
+		);
 	});
 });

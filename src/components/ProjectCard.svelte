@@ -9,7 +9,7 @@
 		<p class="project-index" aria-hidden="true">{project.index}</p>
 		<div>
 			<p class="eyebrow">{project.category}</p>
-			<h3>{project.title}</h3>
+			<h4>{project.title}</h4>
 		</div>
 	</header>
 
@@ -29,9 +29,15 @@
 
 	<footer class="project-card__footer">
 		<p>{project.proof}</p>
-		<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- URL is an external project link. -->
-		<a href={project.href} target="_blank" rel="noreferrer">
+		<!-- eslint-disable svelte/no-navigation-without-resolve -- URL is an external project link. -->
+		<a
+			href={project.href}
+			target="_blank"
+			rel="noreferrer"
+			aria-label={`${project.linkLabel}: ${project.title}`}
+		>
 			{project.linkLabel} <span aria-hidden="true">↗</span>
 		</a>
+		<!-- eslint-enable svelte/no-navigation-without-resolve -->
 	</footer>
 </article>

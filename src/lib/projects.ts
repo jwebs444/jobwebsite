@@ -1,6 +1,7 @@
 export type FeaturedProject = {
 	index: string;
 	title: string;
+	group: ProjectGroupId;
 	category: string;
 	summary: string;
 	href: string;
@@ -10,11 +11,33 @@ export type FeaturedProject = {
 	proof: string;
 };
 
+export type ProjectGroupId = 'public-systems' | 'software-builds';
+
+export const projectGroups: Array<{
+	id: ProjectGroupId;
+	label: string;
+	description: string;
+}> = [
+	{
+		id: 'public-systems',
+		label: 'Connected public systems',
+		description:
+			'Three independent public properties shaped by the same field practice: turn direct observation into useful maps, route context, and original publishing.'
+	},
+	{
+		id: 'software-builds',
+		label: 'Focused software builds',
+		description:
+			'Two public repositories that put weather-data integration and testable game-state design in view.'
+	}
+];
+
 export const featuredProjects: FeaturedProject[] = [
 	{
 		index: '01',
 		title: 'Roost Atlas',
-		category: 'Mapping product · Public lands data',
+		group: 'public-systems',
+		category: 'Camping atlas · Public-lands data',
 		summary:
 			'A live public-lands camping map for finding free, dispersed, and developed places to roost.',
 		href: 'https://roostatlas.com',
@@ -29,23 +52,42 @@ export const featuredProjects: FeaturedProject[] = [
 	},
 	{
 		index: '02',
-		title: 'Mr. Crowmeister',
-		category: 'Publishing platform · Personal brand',
+		title: 'PerchPoints',
+		group: 'public-systems',
+		category: 'Photographic atlas · Route planning',
 		summary:
-			'An original publishing platform for videos, maps, sound, field images, writing, and practical guides.',
+			'A photographic atlas of reviewed places, paired with provenance-aware map locations and multi-day Flightways.',
+		href: 'https://perchpoints.com',
+		linkLabel: 'Open live site',
+		technologies: ['SvelteKit', 'TypeScript', 'Leaflet', 'OpenStreetMap', 'Cloudflare'],
+		highlights: [
+			'Preserves exact, approximate, area-only, and withheld location tiers.',
+			'Builds Flightways around routed drives, outing estimates, and reviewed sleep leads.',
+			'Distinguishes photographed PerchPoints from honest source-only travel stops.'
+		],
+		proof: 'Live atlas · provenance-aware locations · reviewed Flightways'
+	},
+	{
+		index: '03',
+		title: 'Mr. Crowmeister',
+		group: 'public-systems',
+		category: 'Publishing platform · Field media',
+		summary:
+			'An original publishing platform for video, sound, field photography, writing, maps, and practical guides.',
 		href: 'https://mrcrowmeister.com',
 		linkLabel: 'Open live site',
 		technologies: ['React', 'TypeScript', 'Cloudflare', 'Content pipeline', 'Responsive media'],
 		highlights: [
-			'Brings several media formats into one coherent editorial and navigation system.',
-			'Uses responsive media delivery and generated content to keep publishing maintainable.',
-			'Connects storytelling with practical field tools, including Roost Atlas.'
+			'Keeps each medium legible inside one coherent editorial and navigation system.',
+			'Uses responsive media delivery and generated indexes to keep publishing maintainable.',
+			'Moves between field evidence and original storytelling without flattening either into a feed.'
 		],
 		proof: 'Live platform · original media · ongoing publishing system'
 	},
 	{
-		index: '03',
+		index: '04',
 		title: 'Canyon Rain',
+		group: 'software-builds',
 		category: 'Forecast API · Data integration',
 		summary:
 			'A FastAPI service that compares National Weather Service and OpenWeather precipitation forecasts for a requested coordinate.',
@@ -60,8 +102,9 @@ export const featuredProjects: FeaturedProject[] = [
 		proof: '7 automated tests · GitHub Actions · documented API'
 	},
 	{
-		index: '04',
+		index: '05',
 		title: 'DungeonCrawler',
+		group: 'software-builds',
 		category: 'Game systems · Object-oriented Python',
 		summary:
 			'A turn-based command-line adventure built around randomized exploration, profession-specific attributes, combat, loot, and resource management.',

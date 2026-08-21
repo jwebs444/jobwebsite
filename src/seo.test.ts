@@ -23,5 +23,8 @@ describe('search discovery contract', () => {
 		expect(pageSource).toContain("'@type': 'ProfilePage'");
 		expect(pageSource).toContain("'@type': 'Person'");
 		expect(pageSource).toContain("'@type': 'WebSite'");
+		expect(pageSource).toContain("'@type': 'ItemList'");
+		expect(pageSource).toContain("'https://jasonweber.me/#selected-work'");
+		expect(pageSource).toContain('itemListElement: featuredProjects.map');
 	});
 });
