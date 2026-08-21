@@ -2,8 +2,9 @@
 
 ## Status and purpose
 
-- Product state: live product accepted complete, 2026-08-12; five-project local
-  candidate frozen 2026-08-20 for independent Traditional review.
+- Product state: live product accepted complete, 2026-08-12; reviewed
+  five-project release published and independently verified 2026-08-20. Owner
+  acceptance of that release remains a separate fact and is not inferred.
 - Toolset: Traditional.
 - Repository/live branch: `jwebs444/JasonWeber.me`, `main`.
 - Live domain: `jasonweber.me`.
@@ -25,7 +26,7 @@ lore. Desktop identity header and Contact remain sticky. Work, Experience, and
 Approach are ordinary navigation/anchors, not a persistent mobile tab system.
 
 Selected work remains a text-led editorial system rather than an image-card
-gallery. The current local candidate presents, in order, Roost Atlas,
+gallery. The current live product presents, in order, Roost Atlas,
 PerchPoints, Mr. Crowmeister, Canyon Rain, and DungeonCrawler. The first three
 sit under `Connected public systems` as three independent public properties
 shaped by a shared field practice; the language must not make one property the
@@ -82,7 +83,7 @@ ungranted publication authority.
   sitemap. Social URL and structured data use the same HTTPS host and trailing
   slash.
 - Structured data: a `ProfilePage` connects the visible Jason Weber `Person`
-  and the canonical `WebSite`; the local candidate also connects a five-entry
+  and the canonical `WebSite`; the live product also connects a five-entry
   `ItemList` whose order, names, descriptions, and URLs derive from the visible
   project data. Public LinkedIn/GitHub profiles and the visible portrait remain
   the only identity references.
@@ -133,9 +134,51 @@ ungranted publication authority.
 - Builder-created disposable tooling residue: `.pnpm-store/`, `.wrangler/`,
   `pnpm-lock.yaml`, and `pnpm-workspace.yaml` appeared during local tool setup.
   They are not product work, are excluded from the candidate identity, must not
-  be staged, and remain unremoved because cleanup was not authorized.
-- Release state: local candidate only. No commit, staging, push, remote Git,
+  be staged, and were outside the frozen candidate.
+- State at freeze: local candidate only. No commit, staging, push, remote Git,
   deployment, DNS/account action, custom-domain verification, publication, or
-  owner acceptance occurred.
-- Next action: independent Traditional Reviewer audits the frozen candidate and
-  its canonical path/hash manifest before any correction or release decision.
+  owner acceptance had occurred.
+- Freeze handoff: independent Traditional Reviewer audited the frozen candidate
+  and its canonical path/hash manifest before the release decision.
+
+## 2026-08-20 release record — selected work
+
+- Independent Traditional review passed with no findings or blockers. The
+  canonical sorted `path|uppercase-SHA256` LF manifest reproduced at 761 UTF-8
+  bytes with fingerprint
+  `333132C69ABB7D4B9EE256FA68F268DAC6889538DA0061E206FAD4FB719407C1`.
+- Pre-release recovery branch
+  `recovery/jasonweber-2026-08-20-pre-selected-work` was created at and pushed
+  to `c49334ae6ab6232a9bb6b704425c5989e3846ada`; the remote branch SHA was
+  independently verified.
+- The exact nine-path candidate was committed as
+  `b75a79e2fb0b67c253934b1df7d4e928ceb6ca86` with tree
+  `aaf2c4cb25facb34f9ffad89c84081199d3ac665`. Guarded host Git pushed it to
+  `main`, and a separate guarded remote query verified the destination SHA.
+- Cloudflare Pages recorded a failed same-source attempt,
+  `566e9052-5373-4739-92e3-ba02b33269fc`, and the successful production
+  deployment `eee886b2-859d-4b88-bb4f-c45fd6f32540`, both for source
+  `b75a79e`. The failed attempt was not treated as publication evidence.
+- Initial cache-busted custom-domain replay still served the old four-project
+  surface and was recorded as propagation evidence. A later cache-busted replay
+  of `https://jasonweber.me/` served the reviewed five-project product in the
+  required Roost Atlas, PerchPoints, Mr. Crowmeister, Canyon Rain, and
+  DungeonCrawler order.
+- Live browser verification covered 320x640, 390x844, 640x720, 844x390,
+  1050x700, 1051x700, 2048x1052, and 3840x2160. Every viewport retained the
+  required content and order with no document-level horizontal overflow; the
+  1/2/3-column seams and the accepted 2048x1052 opening composition held.
+- Live metadata verification found the canonical `https://jasonweber.me/`,
+  the accepted title and description, index/follow robots policy, versioned
+  social image, and a `WebSite` / `ProfilePage` / five-item `ItemList` /
+  `Person` JSON-LD graph whose item order and URLs matched the visible cards.
+  Cache-busted HTTPS checks returned 200 for the HTML, release CSS, robots,
+  sitemap, and versioned social image.
+- Release hygiene removed the exact untracked generated `.pnpm-store/` and
+  `pnpm-workspace.yaml` targets. Untracked `pnpm-lock.yaml` was retained because
+  tracked `.prettierignore` references it; untracked `.wrangler/` was retained
+  because its Miniflare database files were locked by another process. Neither
+  retained target entered a commit, and no process was terminated for cleanup.
+- This record documents implementation, recovery, remote verification,
+  deployment, propagation, live behavior, and cleanup as separate facts. It
+  does not infer owner acceptance and made no DNS or account change.
